@@ -1,21 +1,22 @@
 
 
 
-let Cloud = new Perso('Cloud',100,10,7,4,2);
+let Cloud = new Perso('Cloud',100,20,7,4,2);
 
-let Sephiroth = new Perso('Sephiroth',200,5,11,2,1);
+let Sephiroth = new Perso('Sephiroth',200,10,11,2,1);
 
-function endGame(pvSephiroth,pvCloud) {
-    if (pvSephiroth == 0) {
+let contreTaillade = new Skills('Contre-taillade',usedCp=5);
+
+function endGame(pvCloud,pvSephiroth) {
+    if (pvSephiroth <= 0) {
         console.log("Sephiroth died");
 
         
     }
 
-    if (pvCloud == 0) {
+    if (pvCloud <= 0) {
         console.log("Cloud died");
     }
-    
 };
 
 let form = document.querySelector('form');
@@ -31,19 +32,22 @@ attack.addEventListener('click' , function(event){
     console.log(`Cloud perd ${Sephiroth.attack2()}, il lui reste ${Cloud.pv} pv !!!`);
     let pvSephiroth = Sephiroth.pv;
     let pvCloud = Cloud.pv;
-    endGame(pvSephiroth,pvCloud);
+    endGame(pvCloud,pvSephiroth);
 });
 
 
 skill.addEventListener('click' , function(event){
-    Sephiroth.pv = Sephiroth.pv - Cloud.skill();
+    let cp = Cloud.cp - contreTaillade.usedCp;
+    console.log(cp);
+    Sephiroth.pv = Sephiroth.pv - contreTaillade.contreTaillade(cp);
+    
     Cloud.pv = Cloud.pv - Sephiroth.attack2();
-    console.log('Climhazard !!!');
-    console.log(`Sephiroth perd ${Cloud.skill()}, il lui reste ${Sephiroth.pv} pv !!!`);
+    console.log(`reste ${cp} cp.`);
+    console.log(`Sephiroth perd ${contreTaillade.contreTaillade(str)}, il lui reste ${Sephiroth.pv} pv !!!`);
     console.log(`Cloud perd ${Sephiroth.attack2()}, il lui reste ${Cloud.pv} pv !!!`);
     let pvSephiroth = Sephiroth.pv;
     let pvCloud = Cloud.pv;
-    endGame(pvSephiroth,pvCloud);
+    endGame(pvCloud,pvSephiroth);
     
     
 });
@@ -53,11 +57,14 @@ block.addEventListener('click' , function(event){
     Cloud.pv = Cloud.pv - Sephiroth.attack2() + Cloud.block();
     let calculDef = Sephiroth.attack2() - Cloud.block();
      console.log(`Cloud perd ${Sephiroth.attack2()}, récupère ${Cloud.block()} pv, il lui reste ${Cloud.pv} pv !!!`);
-     let pvSephiroth = Sephiroth.pv;
      let pvCloud = Cloud.pv;
-     endGame(pvSephiroth,pvCloud);
+     let pvSephiroth = Sephiroth.pv;
+     endGame(pvCloud,pvSephiroth);
+    
+
     
 });
+
 
 /* item.addEventListener('click' , function(event){
     console.log(Cloud.useItem());
