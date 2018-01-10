@@ -52,7 +52,7 @@ block.addEventListener('click' , function(event){
     console.log('Sephiroth attaque pendant que Cloud bloque !!!');
     Cloud.pv = Cloud.pv - Sephiroth.attack2() + Cloud.block();
     let calculDef = Sephiroth.attack2() - Cloud.block();
-     console.log(`Cloud perd ${calculDef}, il lui reste ${Cloud.pv} pv !!!`);
+     console.log(`Cloud perd ${Sephiroth.attack2()}, récupère ${Cloud.block()} pv, il lui reste ${Cloud.pv} pv !!!`);
      let pvSephiroth = Sephiroth.pv;
      let pvCloud = Cloud.pv;
      endGame(pvSephiroth,pvCloud);
