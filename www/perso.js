@@ -8,10 +8,7 @@ class Perso {
         this.item = item;
     }
 
-    attack1() {
-        let str = this.str + Math.floor((Math.random() * 9) + 0);
-        return str;
-    }
+    
 
     attack2() {
         let str = this.str + Math.floor((Math.random() * 3) + 0);
@@ -27,6 +24,8 @@ class Perso {
         return def;
         return pv;
     }
+
+    
 
     useItem() {
         console.log ('Hi-potion');
