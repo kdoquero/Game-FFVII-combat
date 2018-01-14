@@ -63,7 +63,7 @@ form {
     height: 86px;
     width: 100px;
     background-image: url("assets/sprites/unit_idle_207000105.png");
-    /*animation : walkRight 1s steps(3) infinite;*/
+    animation : walkRight 1s steps(3) infinite;
 }
 
 @keyframes walkRight {
@@ -73,7 +73,7 @@ form {
     }
     to {
         background-position-y: 0;
-        background-position-x: -177px;
+        background-position-x: -300px;
     }
 }
 
@@ -83,7 +83,18 @@ form {
     height: 86px;
     width: 150px;
     background-image: url("assets/sprites/unit_idle_207001005.png");
+    animation : idle 1s steps(3) infinite;
 }
 
 
 
+@keyframes idle {
+    from {
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+    to {
+        background-position-y: 0;
+        background-position-x: -432px;
+    }
+}
