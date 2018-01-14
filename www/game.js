@@ -30,6 +30,9 @@ let skill4 = document.querySelector('#skill4');
 let SephirothHp = document.querySelector('.barpv1');
 let SephirothHpcontainer = document.querySelector('.barcontainer');
 let gameOver = document.querySelector('#gameover');
+let containerPerso = document.querySelector('.container-perso');
+let perso1 = document.querySelector('.perso1');
+let perso2 = document.querySelector('.perso2');
 
 
 function useSkills(user,target) {
@@ -58,6 +61,23 @@ function useSkills(user,target) {
     endGame(Cloud,Sephiroth);
     
 };
+
+function animationatk() {
+    perso1.setAttribute('class', 'perso1atk');
+    perso2.setAttribute('class', 'perso2atk');
+    containerPerso.style.justifyContent = "center";
+    perso2.addEventListener('animationend', function() {
+        perso2.setAttribute('class', 'perso2');
+        containerPerso.style.justifyContent = "space-around";
+    });
+    perso1.addEventListener('animationend', function() {
+        perso1.setAttribute('class', 'perso1');
+        containerPerso.style.justifyContent = "space-around";
+        
+    });
+    
+    
+}
 
 function normalAttack(user,target) {
     let att = user.str + Math.floor((Math.random() * 9) + 0);
@@ -120,9 +140,11 @@ function iaAttack(user, target) {
 
 
 attack.addEventListener('click' , function(event){
+  
 
     iaAttack(Sephiroth,Cloud);
     normalAttack(Cloud,Sephiroth);
+    animationatk();
     display();
     endGame(Cloud,Sephiroth);
 });

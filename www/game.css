@@ -105,7 +105,7 @@ form {
     animation : walkRight 1s steps(3) infinite;
 }
 
-@keyframes walkRight {
+@keyframes atk1 {
     from {
         background-position-y: 0;
         background-position-x: 0;
@@ -116,6 +116,32 @@ form {
     }
 }
 
+.perso1atk {
+    height: 110px;
+    width: 160px;
+    overflow: hidden;
+    background-image: url("assets/sprites/unit_atk_207000105.png");
+    animation : atk-x 1s 4 steps(3),
+    atk-y 4s 1 steps(4);
+}
+
+@keyframes atk-x {
+    from {
+        background-position-x: 0;
+    }
+    to {
+        background-position-x: -500px;
+    }
+}
+@keyframes atk-y {
+    from {
+        background-position-y: 0;
+    }
+    to {
+        background-position-y: -489px;
+    }
+}
+
 
 .perso2 {
     display: block;
@@ -123,6 +149,32 @@ form {
     width: 150px;
     background-image: url("assets/sprites/unit_idle_207001005.png");
     animation : idle 1s steps(3) infinite;
+}
+
+.perso2atk {
+    height: 120px;
+    width: 230px;
+    background-image: url("assets/sprites/unit_atk_207001005mirror.png");
+    overflow: hidden;
+    animation : atk2-x 0.5s 9 steps(3),
+    atk2-y 4s 1 steps(9);
+}
+
+@keyframes atk2-x {
+    from {
+        background-position-x: 0;
+    }
+    to {
+        background-position-x: -771px;
+    }
+}
+@keyframes atk2-y {
+    from {
+        background-position-y: 0;
+    }
+    to {
+        background-position-y: -1431px;
+    }
 }
 
 
