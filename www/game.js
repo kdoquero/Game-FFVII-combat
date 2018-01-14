@@ -242,7 +242,7 @@ function display() {
 
     
     sephirothHp.style.width = Sephiroth.pv/2  + "%";
-    cloudHp.style.width = Cloud.pv/2  + "%";
+    cloudHp.style.width = Cloud.pv/2.5  + "%";
 
     
 }
