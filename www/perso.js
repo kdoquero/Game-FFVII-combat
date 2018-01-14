@@ -27,7 +27,8 @@ class Perso {
 
     
 
-    useItem() {
-        console.log ('Hi-potion');
+    useItem(item) {
+        this.pv = this.pv + item.hp
+        console.log(`used ${item.name} recovered ${item.hp} pv. ${this.pv} left.` )
     }
 }

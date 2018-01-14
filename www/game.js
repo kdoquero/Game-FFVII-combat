@@ -1,9 +1,21 @@
 
 
 
-let Cloud = new Perso('Cloud',175,20,7,4,2);
+let Cloud = new Perso('Cloud',200,15,7,4,2);
 
-let Sephiroth = new Perso('Sephiroth',135,10,12,2,1);
+let Sephiroth = new Perso('Sephiroth',150,10,12,2,1);
+
+let climHazard = new Skills('Climhazard',7,4);
+
+let potion = {
+    name : 'Potion',
+    hp : 50
+}
+
+let hiPotion = {
+    name : 'hi-potion',
+    hp : 100
+}
 
 let form = document.querySelector('form');
 let attack = document.querySelector('#attack');
@@ -11,11 +23,23 @@ let skill = document.querySelector('#skill');
 let block = document.querySelector('#block');
 let item = document.querySelector('#item');
 
-function contreTaillade(target,attaker) {
-  let att = attaker.str *3 + Math.floor((Math.random() * 4) + 0);
-  target.pv = target.pv - att;
-  console.log(`${target.name} perd ${att} pv, il lui reste ${target.pv} pv !!!`);
-  return target.pv;    
+function useSkills(user,target) {
+
+       user.cp = user.cp - 5;
+        console.log(`Il reste ${user.cp} cp a ${user.name}`)
+
+    if (user.cp <= 4) {
+        console.log('pas assez de cp, attaque normal');
+        normalAttack(Sephiroth,Cloud);
+
+        
+    }
+        let att = user.str *3 + Math.floor((Math.random() * 4) + 0);
+        target.pv = target.pv - att;
+        console.log(`${target.name} perd ${att} pv, il lui reste ${target.pv} pv !!!`);
+        return target.pv;
+        normalAttack(Cloud,Sephiroth); 
+    endGame(Cloud,Sephiroth);
 };
 
 function normalAttack(target,attaker) {
@@ -25,24 +49,43 @@ function normalAttack(target,attaker) {
     return target.pv;
 };
 
-function block(target) {
-    let calcDef = target.def
+function actionBlock(target,attaker) {
+    target.pv = target.pv + target.def + Math.floor((Math.random() * 5) + 0) - attaker.str;
+    console.log(`${target.name} bloque ,il lui reste ${target.pv}, l'attaque de ${attaker.name} fait ${attaker.str} dégats de pv.`);
+    return target.pv;
     
 };
 
 function endGame(target1,target2) {
     if (target1.pv <= 0) {
-        console.log(`${target1.name} died`);
+        alert(`${target1.name} died`);
 
         
     }
     if (target2.pv <= 0) {
-        console.log(`${target2.name} died`);
+        alert(`${target2.name} died`);
 
         
     }
 
 };
+
+function randomAction(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function enemyAtk(target, attaker) {
+    let array = [];
+    let rand = randomAction(0, 4);
+
+    if (Sephiroth.pv < 45) {
+        item(Sephiroth);
+    } else {
+        array[rand](target, attaker);
+    }
+}
 
 
 
@@ -55,17 +98,13 @@ attack.addEventListener('click' , function(event){
 
 
 skill.addEventListener('click' , function(event){
-    contreTaillade(Sephiroth,Cloud);
-    contreTaillade(Cloud,Sephiroth);
+    useSkills(Cloud,Sephiroth);
     endGame(Cloud,Sephiroth);
     
 });
 
 block.addEventListener('click' , function(event){
-    console.log('Sephiroth attaque pendant que Cloud bloque !!!');
-    Cloud.pv = Cloud.pv - Sephiroth.attack2() + Cloud.block();
-    let calculDef = Sephiroth.attack2() - Cloud.block();
-     console.log(`Cloud perd ${Sephiroth.attack2()}, récupère ${Cloud.block()} pv, il lui reste ${Cloud.pv} pv !!!`);
+    actionBlock(Cloud,Sephiroth);
      endGame(Cloud,Sephiroth);
     
 
@@ -73,10 +112,11 @@ block.addEventListener('click' , function(event){
 });
 
 
-/* item.addEventListener('click' , function(event){
-    console.log(Cloud.useItem());
+item.addEventListener('click' , function(event){
+    normalAttack(Cloud,Sephiroth);
+    Cloud.useItem(potion);
     
 });
- */
+
 
 
