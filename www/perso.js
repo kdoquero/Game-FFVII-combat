@@ -7,28 +7,4 @@ class Perso {
         this.def = def;
         this.item = item;
     }
-
-    
-
-    attack2() {
-        let str = this.str + Math.floor((Math.random() * 3) + 0);
-        return str;
-    }
-
-    
-
-    block() {
-        let def = this.def + Math.floor((Math.random() * 4) + 0);
-        let pv = this.pv + 2 + Math.floor((Math.random() * 12) + 0);
-
-        return def;
-        return pv;
-    }
-
-    
-
-    useItem(item) {
-        this.pv = this.pv + item.hp
-        console.log(`used ${item.name} recovered ${item.hp} pv. ${this.pv} left.` )
-    }
 }
