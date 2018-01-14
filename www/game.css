@@ -2,8 +2,23 @@ div {
     
 }
 
+ul {
+    list-style-type: none;
+}
+
 main {
+    width: 290px;
     margin-top: 30px;
+
+}
+
+.skill-list {
+    display: flex;
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 250px;
+    margin: 0;
 }
 
 input[type=button] {
@@ -17,8 +32,9 @@ input[type=button] {
 }
 
 form {
-    align-items: center;
-    justify-content: space-around;
+    width: 250px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 .menu {
     height: 100px;
@@ -54,7 +70,7 @@ form {
 .container-perso {
     height: 230px;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: space-around;
     background-image: url("assets/sprites/LafBWtl.gif");
     background-repeat: no-repeat;
 }
@@ -97,4 +113,28 @@ form {
         background-position-y: 0;
         background-position-x: -432px;
     }
+}
+
+.barpv1 {
+    background-color: #b630a077;
+    border: #f3f3f3 1px solid;
+    border-radius: 10px;
+    height: 25px;
+    width: 150px;
+    position: absolute;
+    top: 30px;
+    left: 15px;
+}
+
+.barpv2 {
+
+    background-color: #b630a077;
+    border: #f3f3f3 1px solid;
+    border-radius: 10px;
+    height: 25px;
+    width: 150px;
+    position: absolute;
+    top: 30px;
+    overflow: hidden;
+    left: 80%;
 }

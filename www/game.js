@@ -22,6 +22,11 @@ let attack = document.querySelector('#attack');
 let skill = document.querySelector('#skill');
 let block = document.querySelector('#block');
 let item = document.querySelector('#item');
+let skillblock = document.querySelector('.skill-list');
+let skill1 = document.querySelector('#skill1');
+let skill2 = document.querySelector('#skill2');
+let skill3 = document.querySelector('#skill3');
+let skill4 = document.querySelector('#skill4');
 
 function useSkills(user,target) {
 
@@ -98,6 +103,14 @@ attack.addEventListener('click' , function(event){
 
 
 skill.addEventListener('click' , function(event){
+    skillblock.style.display ='flex';
+
+    //useSkills(Cloud,Sephiroth);
+    //endGame(Cloud,Sephiroth);
+    
+});
+
+skill1.addEventListener('click' , function(event){
     useSkills(Cloud,Sephiroth);
     endGame(Cloud,Sephiroth);
     
