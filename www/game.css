@@ -89,8 +89,9 @@ form {
     height: 230px;
     align-items: center;
     justify-content: space-between;
+
     background-image: url("assets/sprites/LafBWtl.gif");
-    background-repeat: no-repeat;
+    background-repeat: round;
     align-items: center;
 }
 .container-perso {
