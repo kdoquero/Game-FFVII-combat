@@ -155,8 +155,8 @@ form {
 
 .perso1def {
     height: 70px;
-    width: 65px;
-    background-image: url('assets/sprites/unit_magic_def_207000105.png');
+    width: 55px;
+    background-image: url('assets/sprites/unit_magic_def_207000105shi2.png');
     animation : def-x 3s 1 steps(3);
     
 
@@ -175,7 +175,7 @@ form {
 .perso2def {
     height: 70px;
     width: 130px;
-    background-image: url('assets/sprites/unit_magic_def_207001005.png');
+    background-image: url('assets/sprites/unit_magic_def_207001005shi2.png');
     animation : def-x 3s 1 steps(3);
     
 
