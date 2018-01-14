@@ -6,10 +6,30 @@ class Skills extends Perso {
         this.strMultiplier = strMultiplier;
 
     }
-
-    ClimHazard () {
-        this.cpCost =7;
-        this.skillName = Climhazard;
+    skillattack(user,target) {
+        if (user.cp < 5) {
+            console.log('no cp left,attaque normale');
+            let att2 = user.str;
+            target.pv = target.pv -att2;
+            iaAttack(user, this.name);
+            console.log(`il reste ${user.cp} cp à ${user.name}.`)
+            console.log(`${target.name} perd ${att2} pv, il lui reste ${target.pv}pv`);
+            console.log(`il reste à ${user.name},  ${user.pv}pv`);
+            
+            
+        } else {
+            console.log(`${this.skillName} de ${user.name}.`)
+            user.cp -= user.cp - this.cpCost;
+            let att = user.str*this.strMultiplier + Math.floor((Math.random() * 4) + 0);
+            target.pv = target.pv - att;
+            let att2 = target.str + Math.floor((Math.random() * 19) + 0);
+            console.log(`il reste ${user.cp} cp à ${user.name}.`)
+            console.log(`${target.name} perd ${att}, il lui reste ${target.pv}`)
+            console.log(`${user.name} perd ${att2}, il lui reste ${user.pv}`);
+            return target.hp;
+        }
+        
+        return target.hp;
+        endGame(Cloud,Sephiroth);
     }
-
 }

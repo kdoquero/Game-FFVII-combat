@@ -1,11 +1,11 @@
 
 
 
-let Cloud = new Perso('Cloud',200,15,7,4,2);
+let Cloud = new Perso('Cloud',250,15,7,4,3);
 
-let Sephiroth = new Perso('Sephiroth',300,10,12,2,1);
+let Sephiroth = new Perso('Sephiroth',200,10,12,2,1);
 
-let climHazard = new Skills('Climhazard',7,4);
+let climHazard = new Skills('Climhazard',5,4);
 
 let potion = {
     name : 'Potion',
@@ -62,24 +62,63 @@ function useSkills(user,target) {
     
 };
 
-function animationatk() {
-    perso1.setAttribute('class', 'perso1atk');
-    perso2.setAttribute('class', 'perso2atk');
-    containerPerso.style.justifyContent = "center";
+function animationatk(user) {
+    if (user == Cloud){
+        perso1.setAttribute('class', 'perso1atk');
+        containerPerso.style.justifyContent = "center";
+        perso1.addEventListener('animationend', function() {
+            perso1.setAttribute('class', 'perso1');
+            containerPerso.style.justifyContent = "space-around";
+            
+        });
+        
+    } 
+    if (user ==Sephiroth) {
+        containerPerso.style.justifyContent = "center";
+        perso2.setAttribute('class', 'perso2atk');
     perso2.addEventListener('animationend', function() {
         perso2.setAttribute('class', 'perso2');
         containerPerso.style.justifyContent = "space-around";
-    });
-    perso1.addEventListener('animationend', function() {
-        perso1.setAttribute('class', 'perso1');
-        containerPerso.style.justifyContent = "space-around";
-        
-    });
-    
+    });   
+    }   
+}
+
+function animationdef(user) {
+        if (user == Cloud){
+            perso1.setAttribute('class', 'perso1def');
+            perso1.addEventListener('animationend', function() {
+                perso1.setAttribute('class', 'perso1');
+                
+            });
+            
+        } 
+        if (user == Sephiroth) {
+            perso2.setAttribute('class', 'perso2def');
+        perso2.addEventListener('animationend', function() {
+            perso2.setAttribute('class', 'perso2');
+        });   
+        }   
     
 }
 
+/* function animationDead(target1,target2) {
+    if (target1.pv <= 0) {
+        
+        alert(`${target1.name} died`);
+        //gameOver.style.display ="flex";
+
+        
+    }
+    if (target2.pv <= 0) {
+        alert(`${target2.name} died`);
+        //gameOver.style.display ="flex";
+
+        
+    };
+    
+} */
 function normalAttack(user,target) {
+    animationatk(user);
     let att = user.str + Math.floor((Math.random() * 9) + 0);
     target.pv = target.pv - att;
     console.log(`${target.name} perd ${att} pv, il lui reste ${target.pv} pv !!!`);
@@ -87,6 +126,7 @@ function normalAttack(user,target) {
 };
 
 function actionBlock(user,target) {
+    animationdef(user);
     user.pv = user.pv + user.def*2 + Math.floor((Math.random() * 40) + 0) -target.str;
     console.log(`${user.name} bloque ,il lui reste ${user.pv}, l'attaque de ${target.name} fait ${target.str} dégats de pv.`);
     return target.pv;
@@ -95,13 +135,16 @@ function actionBlock(user,target) {
 
 function endGame(target1,target2) {
     if (target1.pv <= 0) {
-        alert(`${target1.name} died`);
+        perso1.setAttribute('class', 'perso1dead');
+        console.log(`${target1.name} died`);
+        
         //gameOver.style.display ="flex";
 
         
     }
     if (target2.pv <= 0) {
-        alert(`${target2.name} died`);
+        perso2.setAttribute('class', 'perso2dead');
+        console.log(`${target2.name} died`);
         //gameOver.style.display ="flex";
 
         
@@ -116,6 +159,7 @@ function useItem(user,item) {
     }
     else {
         user.pv = user.pv + item.hp
+        user.item--
         console.log(`used ${item.name} recovered ${item.hp} pv. ${user.pv} left.` );
     }
 };
@@ -126,7 +170,12 @@ function randomAction(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function iaAttack(user, target) {
+/* function iaAttack(user, target) {
+    function randomAction(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min;
+    };
     let array = [normalAttack,useSkills,actionBlock];
     let rand = randomAction(0, 3);
 
@@ -134,19 +183,19 @@ function iaAttack(user, target) {
         useItem(Sephiroth,hiPotion);
     } else {
         array[rand](user, target);
-    }
-}
+    };
+}; */
 
 
 
 attack.addEventListener('click' , function(event){
   
 
-    iaAttack(Sephiroth,Cloud);
+    Sephiroth.iaAttack(Sephiroth,Cloud);
     normalAttack(Cloud,Sephiroth);
-    animationatk();
     display();
     endGame(Cloud,Sephiroth);
+    
 });
 
 
@@ -156,7 +205,7 @@ skill.addEventListener('click' , function(event){
 });
 
 skill1.addEventListener('click' , function(event){
-    iaAttack(Sephiroth,Cloud);
+    Sephiroth.iaAttack(Sephiroth,Cloud);
     useSkills(Cloud,Sephiroth);
     endGame(Cloud,Sephiroth);
     display();
@@ -165,7 +214,7 @@ skill1.addEventListener('click' , function(event){
 
 block.addEventListener('click' , function(event){
     actionBlock(Cloud,Sephiroth);
-    iaAttack(Sephiroth,Cloud);
+    Sephiroth.iaAttack(Sephiroth,Cloud);
      endGame(Cloud,Sephiroth);
      display();
     
@@ -175,7 +224,7 @@ block.addEventListener('click' , function(event){
 
 
 item.addEventListener('click' , function(event){
-    iaAttack(Sephiroth,Cloud);
+    Sephiroth.iaAttack(Sephiroth,Cloud);
     useItem(Cloud,potion);
     display();
     
@@ -187,12 +236,12 @@ function display() {
     let sephirothHptext = document.querySelector('#barpv1text');
     let cloudHptext = document.querySelector('#barpv2text');
     let cloudHp = document.querySelector('.barpv2');
-    sephirothHptext.textContent = `PV : ${Sephiroth.pv} /300`;
-    cloudHptext.textContent = `PV : ${Cloud.pv} /200`;
+    sephirothHptext.textContent = `PV : ${Sephiroth.pv} /200`;
+    cloudHptext.textContent = `PV : ${Cloud.pv} /250`;
     skillblock.style.display ='none';
 
     
-    sephirothHp.style.width = Sephiroth.pv/3  + "%";
+    sephirothHp.style.width = Sephiroth.pv/2  + "%";
     cloudHp.style.width = Cloud.pv/2  + "%";
 
     

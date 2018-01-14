@@ -90,7 +90,7 @@ form {
 .container-perso {
     justify-content: space-around;
     width: 80%;
-    align-self: flex-end;
+    align-items: flex-end;
 }
 .container-barres {
     width: 80%;
@@ -102,10 +102,12 @@ form {
     height: 86px;
     width: 100px;
     background-image: url("assets/sprites/unit_idle_207000105.png");
-    animation : walkRight 1s steps(3) infinite;
+    animation : idle1 1s steps(3) infinite;
+
+    
 }
 
-@keyframes atk1 {
+@keyframes idle1 {
     from {
         background-position-y: 0;
         background-position-x: 0;
@@ -122,7 +124,7 @@ form {
     overflow: hidden;
     background-image: url("assets/sprites/unit_atk_207000105.png");
     animation : atk-x 1s 4 steps(3),
-    atk-y 4s 1 steps(4);
+    atk-y 2.5s 1 steps(4);
 }
 
 @keyframes atk-x {
@@ -142,13 +144,68 @@ form {
     }
 }
 
+.perso1def {
+    height: 70px;
+    width: 65px;
+    background-image: url('assets/sprites/unit_magic_def_207000105.png');
+    animation : def-x 3s 1 steps(3);
+    
+
+}
+@keyframes def-x {
+    from {
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+    to {
+        background-position-y: 0;
+        background-position-x: -152px;
+    }
+
+}
+.perso2def {
+    height: 70px;
+    width: 130px;
+    background-image: url('assets/sprites/unit_magic_def_207001005.png');
+    animation : def-x 3s 1 steps(3);
+    
+
+}
+@keyframes def-x {
+    from {
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+    to {
+        background-position-y: 0;
+        background-position-x: -375px;
+    }
+
+}
+
+.perso1dead {
+    height: 40px;
+    width: 125px;
+    background-image: url('assets/sprites/unit_dead_207000105.png');
+    transition: 0.1s;
+
+}
+
+.perso2dead {
+    height: 40px;
+    width: 80px;
+    background-image: url('assets/sprites/unit_dead_207001005.png');
+    transition: 0.1s;
+
+}
+
 
 .perso2 {
     display: block;
     height: 86px;
     width: 150px;
     background-image: url("assets/sprites/unit_idle_207001005.png");
-    animation : idle 1s steps(3) infinite;
+    animation : idle2 1s steps(3) infinite;
 }
 
 .perso2atk {
@@ -156,8 +213,8 @@ form {
     width: 230px;
     background-image: url("assets/sprites/unit_atk_207001005mirror.png");
     overflow: hidden;
-    animation : atk2-x 0.5s 9 steps(3),
-    atk2-y 4s 1 steps(9);
+    animation : atk2-x 0.3s 9 steps(3),
+    atk2-y 2.5s 1 steps(9);
 }
 
 @keyframes atk2-x {
@@ -179,7 +236,7 @@ form {
 
 
 
-@keyframes idle {
+@keyframes idle2 {
     from {
         background-position-y: 0;
         background-position-x: 0;
@@ -209,8 +266,9 @@ form {
     margin-left: 50px;
 }
 #barpv2text {
+    position: absolute;
     color: #e7dfe7;
-    margin-right: 50px;
+    margin-left: 50px;
 }
 
 .barcontainer2 {
