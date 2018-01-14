@@ -33,17 +33,19 @@ let gameOver = document.querySelector('#gameover');
 
 
 function useSkills(user,target) {
-    let att = user.str*3 + Math.floor((Math.random() * 4) + 0);
     if (user.cp < 5) {
         console.log('no cp left');
         let att2 = user.str;
+        target.pv = target.pv -att2;
         console.log(`il reste ${user.cp} cp à ${user.name}.`)
-        console.log(`${target.name} perd ${att}, il lui reste ${target.pv}`);
-        console.log(`${user.name} perd ${att2}, il lui reste ${user.pv}`);
+        console.log(`${target.name} perd ${att2} pv, il lui reste ${target.pv}pv`);
+        console.log(`il reste à ${user.name},  ${user.pv}pv`);
         
         
     } else {
+        console.log(`contre-taillade de ${user.name}.`)
         user.cp -= 5;
+        let att = user.str*4 + Math.floor((Math.random() * 4) + 0);
         target.pv = target.pv - att;
         let att2 = target.str + Math.floor((Math.random() * 19) + 0);
         console.log(`il reste ${user.cp} cp à ${user.name}.`)
@@ -65,7 +67,7 @@ function normalAttack(user,target) {
 };
 
 function actionBlock(user,target) {
-    user.pv = user.pv + user.def*2 + Math.floor((Math.random() * 30) + 0) -target.str;
+    user.pv = user.pv + user.def*2 + Math.floor((Math.random() * 40) + 0) -target.str;
     console.log(`${user.name} bloque ,il lui reste ${user.pv}, l'attaque de ${target.name} fait ${target.str} dégats de pv.`);
     return target.pv;
     
@@ -73,13 +75,14 @@ function actionBlock(user,target) {
 
 function endGame(target1,target2) {
     if (target1.pv <= 0) {
-        gameOver.style.display ="flex";
+        alert(`${target1.name} died`);
+        //gameOver.style.display ="flex";
 
         
     }
     if (target2.pv <= 0) {
         alert(`${target2.name} died`);
-        gameOver.style.display ="flex";
+        //gameOver.style.display ="flex";
 
         
     }
@@ -127,9 +130,6 @@ attack.addEventListener('click' , function(event){
 
 skill.addEventListener('click' , function(event){
     skillblock.style.display ='flex';
-
-    //useSkills(Cloud,Sephiroth);
-    //endGame(Cloud,Sephiroth);
     
 });
 
@@ -162,11 +162,12 @@ item.addEventListener('click' , function(event){
 
 function display() {
     let sephirothHp = document.querySelector('.barpv1');
-    let sephirothHptext = document.querySelector('.barpv1text');
-    let cloudHptext = document.querySelector('.barpv2text');
+    let sephirothHptext = document.querySelector('#barpv1text');
+    let cloudHptext = document.querySelector('#barpv2text');
     let cloudHp = document.querySelector('.barpv2');
     sephirothHptext.textContent = `PV : ${Sephiroth.pv} /300`;
     cloudHptext.textContent = `PV : ${Cloud.pv} /200`;
+    skillblock.style.display ='none';
 
     
     sephirothHp.style.width = Sephiroth.pv/3  + "%";

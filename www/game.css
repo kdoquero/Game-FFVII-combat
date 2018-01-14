@@ -152,11 +152,11 @@ form {
     width: 100%;
     height: 100%;
 }
-.barpv1text {
+#barpv1text {
     color: #e7dfe7;
     margin-left: 50px;
 }
-.barpv2text {
+#barpv2text {
     color: #e7dfe7;
     margin-right: 50px;
 }
@@ -176,16 +176,4 @@ form {
     width: 100%;
     height: 100%;
    
-}
-
-.barcp1 {
-    background-color: #35b63086;
-    border: #f3f3f3 1px solid;
-    border-radius: 10px;
-    height: 25px;
-    width: 75px;
-    position: absolute;
-    top: 30px;
-    left: 15px;
-
 }
