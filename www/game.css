@@ -1,6 +1,12 @@
 div {
     
 }
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('assets/images/wallhaven-95529.jpg');
+    z-index: -100;
+}
 
 ul {
     list-style-type: none;
