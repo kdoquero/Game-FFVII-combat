@@ -1,7 +1,7 @@
 
 
 
-let Cloud = new Perso('Cloud',250,15,7,4,3);
+let Cloud = new Perso('Cloud',250,15,7,4,4);
 
 let Sephiroth = new Perso('Sephiroth',200,10,12,2,1);
 
@@ -33,7 +33,7 @@ let gameOver = document.querySelector('#gameover');
 let containerPerso = document.querySelector('.container-perso');
 let perso1 = document.querySelector('.perso1');
 let perso2 = document.querySelector('.perso2');
-
+let audio = document.querySelector('audio');
 
 function useSkills(user,target) {
     if (user.cp < 5) {
@@ -206,7 +206,7 @@ skill.addEventListener('click' , function(event){
 
 skill1.addEventListener('click' , function(event){
     Sephiroth.iaAttack(Sephiroth,Cloud);
-    useSkills(Cloud,Sephiroth);
+    climHazard.skillattack(Cloud,Sephiroth);
     endGame(Cloud,Sephiroth);
     display();
     
