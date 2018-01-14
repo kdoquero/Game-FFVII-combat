@@ -1,11 +1,12 @@
 
 
 
-let Cloud = new Perso('Cloud',250,15,7,4,4);
+let Cloud = new Perso('Cloud',250,50,7,4,4);
 
-let Sephiroth = new Perso('Sephiroth',200,10,12,2,1);
+let Sephiroth = new Perso('Sephiroth',200,25,12,2,1);
 
 let climHazard = new Skills('Climhazard',5,4);
+let meteo
 
 let potion = {
     name : 'Potion',
@@ -205,6 +206,16 @@ skill.addEventListener('click' , function(event){
 });
 
 skill1.addEventListener('click' , function(event){
+    skill1.setAttribute('value', `${climHazard.skillName}`);
+    Sephiroth.iaAttack(Sephiroth,Cloud);
+    climHazard.skillattack(Cloud,Sephiroth);
+    endGame(Cloud,Sephiroth);
+    display();
+    
+});
+
+skill2.addEventListener('click' , function(event){
+    skill1.setAttribute('value', `${climHazard.skillName}`);
     Sephiroth.iaAttack(Sephiroth,Cloud);
     climHazard.skillattack(Cloud,Sephiroth);
     endGame(Cloud,Sephiroth);
@@ -232,19 +243,26 @@ item.addEventListener('click' , function(event){
 
 
 function display() {
-    let sephirothHp = document.querySelector('.barpv1');
+    let sephirothHp = document.querySelector('#barpv1');
     let sephirothHptext = document.querySelector('#barpv1text');
     let cloudHptext = document.querySelector('#barpv2text');
-    let cloudHp = document.querySelector('.barpv2');
+    let cloudHp = document.querySelector('#barpv2');
+    let sephirothCp = document.querySelector('#barcp1');
+    let cloudCp = document.querySelector('#barcp2');
+    let cloudCptext = document.querySelector('#barcp2text');
+    let sephirothCptext = document.querySelector('#barcp1text');
+
     sephirothHptext.textContent = `PV : ${Sephiroth.pv} /200`;
     cloudHptext.textContent = `PV : ${Cloud.pv} /250`;
+    sephirothHp.style.width = Sephiroth.pv/2  + "%";
+    cloudHp.style.width = Cloud.pv/2.5   + "%";
+    sephirothCp.style.width = Sephiroth.cp*4 + "%";
+    cloudCp.style.width = Cloud.cp*2 + "%";
+    sephirothCptext.textContent = `CP: ${Sephiroth.cp} /25`;
+    cloudCptext.textContent = `CP: ${Cloud.cp} /50`;
     skillblock.style.display ='none';
 
-    
-    sephirothHp.style.width = Sephiroth.pv/2  + "%";
-    cloudHp.style.width = Cloud.pv/2.5  + "%";
-
-    
+4
 }
 
 display();
