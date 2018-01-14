@@ -13,6 +13,8 @@ ul {
 }
 
 section {
+    margin-top: 25vh;
+    justify-content: center;
     align-items: center;
 }
 main {
