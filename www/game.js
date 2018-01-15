@@ -6,7 +6,7 @@ let Cloud = new Perso('Cloud',250,50,7,4,4,250);
 let Sephiroth = new Perso('Sephiroth',200,25,12,2,1,200);
 
 let climHazard = new Skills('Climhazard',5,4);
-let omnislash = new Skills('Omnislash',25,8);
+let meteoRain = new Skills('Meteorain',35,8);
 
 let potion = {
     name : 'Potion',
@@ -16,6 +16,11 @@ let potion = {
 let hiPotion = {
     name : 'hi-potion',
     hp : 100
+}
+
+let manaPot = {
+    name : 'Ether',
+    cp : 25
 }
 
 let form = document.querySelector('form');
@@ -164,22 +169,6 @@ function animationItem(user) {
 
 }
 
-/* function animationDead(target1,target2) {
-    if (target1.pv <= 0) {
-        
-        alert(`${target1.name} died`);
-        //gameOver.style.display ="flex";
-
-        
-    }
-    if (target2.pv <= 0) {
-        alert(`${target2.name} died`);
-        //gameOver.style.display ="flex";
-
-        
-    };
-    
-} */
 function normalAttack(user,target) {
     animationatk(user);
     let att = user.str + Math.floor((Math.random() * 9) + 0);
@@ -275,12 +264,17 @@ attack.addEventListener('click' , function(event){
 
 
 skill.addEventListener('click' , function(event){
-    skillblock.style.display ='flex';
+    if (skillblock.style.display =='flex') {
+        skillblock.style.display ='none';
+        
+    }else {
+        skillblock.style.display ='flex';
+    }
+    
     
 });
 
 skill1.addEventListener('click' , function(event){
-    animationAtkSkill(user);
     animationAtkSkill(Cloud);
     Sephiroth.iaAttack(Sephiroth,Cloud);
     climHazard.skillattack(Cloud,Sephiroth);
@@ -291,7 +285,7 @@ skill1.addEventListener('click' , function(event){
 
 skill2.addEventListener('click' , function(event){
     Sephiroth.iaAttack(Sephiroth,Cloud);
-    omnislash.skillattack(Cloud,Sephiroth);
+    meteoRain.skillattack(Cloud,Sephiroth);
     animationAtkSkill2(Cloud);
     endGame(Cloud,Sephiroth);
     display();
@@ -336,6 +330,7 @@ function display() {
     sephirothCptext.textContent = `CP: ${Sephiroth.cp} /25`;
     cloudCptext.textContent = `CP: ${Cloud.cp} /50`;
     skill1.setAttribute('value', `${climHazard.skillName} : ${climHazard.cpCost} cp`);
+    skill2.setAttribute('value', `${meteoRain.skillName} : ${meteoRain.cpCost} cp`);
     skillblock.style.display ='none';
 
 4

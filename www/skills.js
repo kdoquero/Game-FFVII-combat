@@ -10,7 +10,7 @@ class Skills extends Perso {
         if (user.cp < this.cpCost) {
             console.log('no cp left,attaque normale');
             let att2 = user.str;
-            target.pv = target.pv -att2;
+            target.pv = target.pv - att2;
             target.iaAttack(user, target);
             console.log(`il reste ${user.cp} cp à ${user.name}.`)
             console.log(`${target.name} perd ${att2} pv, il lui reste ${target.pv}pv`);

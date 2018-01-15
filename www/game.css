@@ -18,7 +18,7 @@ section {
     align-items: center;
 }
 main {
-    max-width: 70%;
+    width: 25%;
     margin-top: 30px;
 
 }
@@ -30,9 +30,11 @@ main {
 .skill-list {
     display: flex;
     display: none;
+    flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
-    width: 250px;
+    justify-content: flex-start;
+    al
+    width: 350px;
     margin: 0;
 }
 
@@ -185,8 +187,8 @@ form {
     width: 375px;
     overflow: hidden;
     background-image: url("assets/sprites/unit_limit_atk1_207000105.png");
-    animation : skill22-x 3s 18 steps(3),
-    skill22-y 3s 1 steps(18);
+    animation : skill22-x 2s 18 steps(3),
+    skill22-y 2s 1 steps(18);
 }
 
 @keyframes skill22-x {
