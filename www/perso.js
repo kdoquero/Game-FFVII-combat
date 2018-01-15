@@ -1,5 +1,5 @@
 class Perso {
-    constructor(name,pv,cp,str,def,item,maxPv) {
+    constructor(name,pv,cp,str,def,item,maxPv,id) {
         this.name = name;
         this.pv = pv;
         this.cp = cp;
@@ -7,7 +7,10 @@ class Perso {
         this.def = def;
         this.item = item;
         this.maxPv = maxPv;
+        this.id = id;
     }
+
+    
 
     iaAttack(user, target) {
         function randomAction(min, max) {

@@ -33,10 +33,20 @@ main {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
-    al
     width: 350px;
     margin: 0;
 }
+
+.item-list {
+    display: flex;
+    display: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 350px;
+    margin: 0;
+}
+
 
 input[type=button] {
     background-color: rgba(17, 1, 165, 0);
@@ -208,6 +218,32 @@ form {
     }
 }
 
+.perso1skill3 {
+    height: 256px;
+    width: 270px;
+    overflow: hidden;
+    background-image: url("assets/sprites/unit_limit_atk2_207000105.png");
+    animation : skill33-x 4s 30 steps(3),
+    skill33-y 4s 1 steps(30);
+
+}
+
+@keyframes skill33-x {
+    from {
+        background-position-x: 0px;
+    }
+    to {
+        background-position-x: -972px;
+    }
+}
+@keyframes skill33-y {
+    from {
+        background-position-y: 0px;
+    }
+    to {
+        background-position-y: -9450px;
+    }
+}
 
 
 .perso1def {
@@ -254,18 +290,18 @@ form {
     height: 70px;
     width: 55px;
     background-image: url('assets/sprites/unit_magic_item_207000105.png');
-    animation : item-x 3s 1 steps(3);
+    animation : item1-x 3s 1 steps(3);
     
 
 }
-@keyframes item-x {
+@keyframes item1-x {
     from {
         background-position-y: 0;
         background-position-x: 0;
     }
     to {
         background-position-y: 0;
-        background-position-x: -152px;
+        background-position-x: -179px;
     }
 
 }

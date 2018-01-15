@@ -1,6 +1,6 @@
 class Skills extends Perso {
-    constructor(skillName,cpCost,strMultiplier,str,name,pv,cp,def,item) {
-        super(name,pv,cp,str,def,item);
+    constructor(skillName,cpCost,strMultiplier,str,name,pv,cp,def,item,maxPV,id) {
+        super(name,pv,cp,str,def,item,maxPV,id);
         this.skillName = skillName;
         this.cpCost = cpCost;
         this.strMultiplier = strMultiplier;
@@ -15,6 +15,7 @@ class Skills extends Perso {
             console.log(`il reste ${user.cp} cp à ${user.name}.`)
             console.log(`${target.name} perd ${att2} pv, il lui reste ${target.pv}pv`);
             console.log(`il reste à ${user.name},  ${user.pv}pv`);
+            animationatk(user);
             
             
         } else {
@@ -26,6 +27,7 @@ class Skills extends Perso {
             console.log(`il reste ${user.cp} cp à ${user.name}.`)
             console.log(`${target.name} perd ${att}, il lui reste ${target.pv}`)
             return target.hp;
+            animationAtkSkill(user);
         }
         
         return target.hp;

@@ -1,12 +1,13 @@
 
 
 
-let Cloud = new Perso('Cloud',275,50,7,4,4,250);
+let Cloud = new Perso('Cloud',275,50,7,4,4,250,0);
 
-let Sephiroth = new Perso('Sephiroth',200,25,12,2,1,200);
+let Sephiroth = new Perso('Sephiroth',200,25,12,2,1,200,1);
 
 let climHazard = new Skills('Climhazard',5,4);
 let meteoRain = new Skills('Meteorain',22,9);
+let omnislash = new Skills('Omnislash',45,14);
 
 let potion = {
     name : 'Potion',
@@ -29,10 +30,15 @@ let skill = document.querySelector('#skill');
 let block = document.querySelector('#block');
 let item = document.querySelector('#item');
 let skillblock = document.querySelector('.skill-list');
+let itemblock = document.querySelector('.item-list');
 let skill1 = document.querySelector('#skill1');
 let skill2 = document.querySelector('#skill2');
 let skill3 = document.querySelector('#skill3');
 let skill4 = document.querySelector('#skill4');
+let item1 = document.querySelector('#item1');
+let item2 = document.querySelector('#item2');
+let item3 = document.querySelector('#item3');
+let item4 = document.querySelector('#item4');
 let SephirothHp = document.querySelector('.barpv1');
 let SephirothHpcontainer = document.querySelector('.barcontainer');
 let gameOver = document.querySelector('#gameover');
@@ -132,6 +138,28 @@ function animationAtkSkill2(user) {
     }   
 }
 
+function animationAtkSkill3(user) {
+    if (user == Cloud){
+        perso1.setAttribute('class', 'perso1skill3');
+        containerPerso.style.justifyContent = "center";
+        perso1.addEventListener('animationend', function() {
+            perso1.setAttribute('class', 'perso1');
+            containerPerso.style.justifyContent = "space-around";
+            
+        });
+        
+    } 
+    if (user == Sephiroth) {
+        containerPerso.style.justifyContent = "center";
+        perso2.setAttribute('class', 'perso2skill3');
+    perso2.addEventListener('animationend', function() {
+        perso2.setAttribute('class', 'perso2');
+        containerPerso.style.justifyContent = "space-around";
+    });   
+    }   
+}
+
+
 
 function animationdef(user) {
         if (user == Cloud){
@@ -212,7 +240,12 @@ function endGame(target1,target2) {
 
 function useItem(user,item) {
     if (user.item == 0) {
+        item1.style.display ='none';
+        item2.style.display ='none';
+        item3.style.display ='none';
+        item4.style.display ='none';
         console.log('no item left');
+
         
     }
 
@@ -275,18 +308,31 @@ skill.addEventListener('click' , function(event){
 });
 
 skill1.addEventListener('click' , function(event){
-    animationAtkSkill(Cloud);
+    
     Sephiroth.iaAttack(Sephiroth,Cloud);
+    animationAtkSkill(Cloud);
     climHazard.skillattack(Cloud,Sephiroth);
+    
     endGame(Cloud,Sephiroth);
     display();
     
 });
 
 skill2.addEventListener('click' , function(event){
+    animationAtkSkill2(Cloud);
     Sephiroth.iaAttack(Sephiroth,Cloud);
     meteoRain.skillattack(Cloud,Sephiroth);
-    animationAtkSkill2(Cloud);
+    
+    endGame(Cloud,Sephiroth);
+    display();
+    
+});
+
+skill3.addEventListener('click' , function(event){
+    animationAtkSkill3(Cloud);
+    Sephiroth.iaAttack(Sephiroth,Cloud);
+    omnislash.skillattack(Cloud,Sephiroth);
+   
     endGame(Cloud,Sephiroth);
     display();
     
@@ -304,6 +350,15 @@ block.addEventListener('click' , function(event){
 
 
 item.addEventListener('click' , function(event){
+    if (itemblock.style.display =='flex') {
+        itemblock.style.display ='none';
+        
+    }else {
+        itemblock.style.display ='flex';
+    }
+});
+
+item1.addEventListener('click' , function(event){
     Sephiroth.iaAttack(Sephiroth,Cloud);
     useItem(Cloud,potion);
     display();
@@ -331,6 +386,8 @@ function display() {
     cloudCptext.textContent = `CP: ${Cloud.cp} /50`;
     skill1.setAttribute('value', `${climHazard.skillName} : ${climHazard.cpCost} cp`);
     skill2.setAttribute('value', `${meteoRain.skillName} : ${meteoRain.cpCost} cp`);
+    skill3.setAttribute('value', `${omnislash.skillName} : ${omnislash.cpCost} cp`);
+    item1.setAttribute('value', `${potion.name} : restaure ${potion.hp} pv`);
     skillblock.style.display ='none';
 
 4
