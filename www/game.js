@@ -1,12 +1,12 @@
 
 
 
-let Cloud = new Perso('Cloud',250,50,7,4,4);
+let Cloud = new Perso('Cloud',250,50,7,4,4,250);
 
-let Sephiroth = new Perso('Sephiroth',200,25,12,2,1);
+let Sephiroth = new Perso('Sephiroth',200,25,12,2,1,200);
 
 let climHazard = new Skills('Climhazard',5,4);
-let meteo
+let omnislash = new Skills('Omnislash',25,8);
 
 let potion = {
     name : 'Potion',
@@ -47,6 +47,7 @@ function useSkills(user,target) {
         
         
     } else {
+        animationatk(user);
         console.log(`contre-taillade de ${user.name}.`)
         user.cp -= 5;
         let att = user.str*4 + Math.floor((Math.random() * 4) + 0);
@@ -74,7 +75,7 @@ function animationatk(user) {
         });
         
     } 
-    if (user ==Sephiroth) {
+    if (user == Sephiroth) {
         containerPerso.style.justifyContent = "center";
         perso2.setAttribute('class', 'perso2atk');
     perso2.addEventListener('animationend', function() {
@@ -83,6 +84,49 @@ function animationatk(user) {
     });   
     }   
 }
+
+function animationAtkSkill(user) {
+    if (user == Cloud){
+        perso1.setAttribute('class', 'perso1skill');
+        containerPerso.style.justifyContent = "center";
+        perso1.addEventListener('animationend', function() {
+            perso1.setAttribute('class', 'perso1');
+            containerPerso.style.justifyContent = "space-around";
+            
+        });
+        
+    } 
+    if (user == Sephiroth) {
+        containerPerso.style.justifyContent = "center";
+        perso2.setAttribute('class', 'perso2skill');
+    perso2.addEventListener('animationend', function() {
+        perso2.setAttribute('class', 'perso2');
+        containerPerso.style.justifyContent = "space-around";
+    });   
+    }   
+}
+
+function animationAtkSkill2(user) {
+    if (user == Cloud){
+        perso1.setAttribute('class', 'perso1skill2');
+        containerPerso.style.justifyContent = "center";
+        perso1.addEventListener('animationend', function() {
+            perso1.setAttribute('class', 'perso1');
+            containerPerso.style.justifyContent = "space-around";
+            
+        });
+        
+    } 
+    if (user == Sephiroth) {
+        containerPerso.style.justifyContent = "center";
+        perso2.setAttribute('class', 'perso2skill2');
+    perso2.addEventListener('animationend', function() {
+        perso2.setAttribute('class', 'perso2');
+        containerPerso.style.justifyContent = "space-around";
+    });   
+    }   
+}
+
 
 function animationdef(user) {
         if (user == Cloud){
@@ -100,6 +144,24 @@ function animationdef(user) {
         });   
         }   
     
+}
+
+function animationItem(user) {
+    if (user == Cloud){
+        perso1.setAttribute('class', 'perso1item');
+        perso1.addEventListener('animationend', function() {
+            perso1.setAttribute('class', 'perso1');
+            
+        });
+        
+    } 
+    if (user == Sephiroth) {
+        perso2.setAttribute('class', 'perso2item');
+    perso2.addEventListener('animationend', function() {
+        perso2.setAttribute('class', 'perso2');
+    });   
+    }   
+
 }
 
 /* function animationDead(target1,target2) {
@@ -128,9 +190,15 @@ function normalAttack(user,target) {
 
 function actionBlock(user,target) {
     animationdef(user);
+    if (user.hp >= user.maxPV)  {
+        user.hp = user.maxPV;
+        
+    }
     user.pv = user.pv + user.def*2 + Math.floor((Math.random() * 40) + 0) -target.str;
+    user.cp = user.cp + Math.floor((Math.random() * 3) + 1)
     console.log(`${user.name} bloque ,il lui reste ${user.pv}, l'attaque de ${target.name} fait ${target.str} dégats de pv.`);
     return target.pv;
+    endGame(Cloud,Sephiroth);
     
 };
 
@@ -158,10 +226,16 @@ function useItem(user,item) {
         console.log('no item left');
         
     }
-    else {
+
+    if (user.hp >= user.maxPV)  {
+        user.hp = user.maxPV;
+        
+    } else {
+        
         user.pv = user.pv + item.hp
         user.item--
         console.log(`used ${item.name} recovered ${item.hp} pv. ${user.pv} left.` );
+        animationItem(user);
     }
 };
 
@@ -206,7 +280,8 @@ skill.addEventListener('click' , function(event){
 });
 
 skill1.addEventListener('click' , function(event){
-    skill1.setAttribute('value', `${climHazard.skillName}`);
+    animationAtkSkill(user);
+    animationAtkSkill(Cloud);
     Sephiroth.iaAttack(Sephiroth,Cloud);
     climHazard.skillattack(Cloud,Sephiroth);
     endGame(Cloud,Sephiroth);
@@ -215,9 +290,9 @@ skill1.addEventListener('click' , function(event){
 });
 
 skill2.addEventListener('click' , function(event){
-    skill1.setAttribute('value', `${climHazard.skillName}`);
     Sephiroth.iaAttack(Sephiroth,Cloud);
-    climHazard.skillattack(Cloud,Sephiroth);
+    omnislash.skillattack(Cloud,Sephiroth);
+    animationAtkSkill2(Cloud);
     endGame(Cloud,Sephiroth);
     display();
     
@@ -260,6 +335,7 @@ function display() {
     cloudCp.style.width = Cloud.cp*2 + "%";
     sephirothCptext.textContent = `CP: ${Sephiroth.cp} /25`;
     cloudCptext.textContent = `CP: ${Cloud.cp} /50`;
+    skill1.setAttribute('value', `${climHazard.skillName} : ${climHazard.cpCost} cp`);
     skillblock.style.display ='none';
 
 4

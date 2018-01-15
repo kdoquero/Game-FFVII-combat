@@ -154,6 +154,60 @@ form {
     }
 }
 
+.perso1skill {
+    height: 110px;
+    width: 160px;
+    overflow: hidden;
+    background-image: url("assets/sprites/unit_atk_207000106.png");
+    animation : skill1-x 1s 4 steps(3),
+    skill1-y 2.5s 1 steps(4);
+}
+
+@keyframes skill1-x {
+    from {
+        background-position-x: 0;
+    }
+    to {
+        background-position-x: -500px;
+    }
+}
+@keyframes skill1-y {
+    from {
+        background-position-y: 0;
+    }
+    to {
+        background-position-y: -489px;
+    }
+}
+
+.perso1skill2 {
+    height: 180px;
+    width: 375px;
+    overflow: hidden;
+    background-image: url("assets/sprites/unit_limit_atk1_207000105.png");
+    animation : skill22-x 3s 18 steps(3),
+    skill22-y 3s 1 steps(18);
+}
+
+@keyframes skill22-x {
+    from {
+        background-position-x: 0;
+    }
+    to {
+        background-position-x: -954px;
+    }
+}
+@keyframes skill22-y {
+    from {
+        background-position-y: 0;
+    }
+    to {
+        background-position-y: -4752px;
+    }
+}
+
+
+
 .perso1def {
     height: 70px;
     width: 55px;
@@ -173,6 +227,7 @@ form {
     }
 
 }
+
 .perso2def {
     height: 70px;
     width: 130px;
@@ -182,6 +237,46 @@ form {
 
 }
 @keyframes def-x {
+    from {
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+    to {
+        background-position-y: 0;
+        background-position-x: -375px;
+    }
+
+}
+
+.perso1item {
+    height: 70px;
+    width: 55px;
+    background-image: url('assets/sprites/unit_magic_item_207000105.png');
+    animation : item-x 3s 1 steps(3);
+    
+
+}
+@keyframes item-x {
+    from {
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+    to {
+        background-position-y: 0;
+        background-position-x: -152px;
+    }
+
+}
+
+.perso2item {
+    height: 70px;
+    width: 55px;
+    background-image: url('assets/sprites/unit_magic_item_207001005.png');
+    animation : item-x 3s 1 steps(3);
+    
+
+}
+@keyframes item-x {
     from {
         background-position-y: 0;
         background-position-x: 0;
@@ -243,6 +338,34 @@ form {
         background-position-y: -1431px;
     }
 }
+
+.perso2skill {
+    height: 120px;
+    width: 230px;
+    background-image: url("assets/sprites/unit_atk_207001006mirror.png");
+    overflow: hidden;
+    animation : skill2-x 0.3s 9 steps(3),
+    skill2-y 2.5s 1 steps(9);
+}
+
+@keyframes skill2-x {
+    from {
+        background-position-x: 0;
+    }
+    to {
+        background-position-x: -771px;
+    }
+}
+@keyframes skill2-y {
+    from {
+        background-position-y: 0;
+    }
+    to {
+        background-position-y: -1431px;
+    }
+}
+
+
 
 
 

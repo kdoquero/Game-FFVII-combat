@@ -1,11 +1,12 @@
 class Perso {
-    constructor(name,pv,cp,str,def,item) {
+    constructor(name,pv,cp,str,def,item,maxPv) {
         this.name = name;
         this.pv = pv;
         this.cp = cp;
         this.str = str;
         this.def = def;
         this.item = item;
+        this.maxPv = maxPv;
     }
 
     iaAttack(user, target) {
