@@ -322,7 +322,7 @@ function display() {
     let sephirothCptext = document.querySelector('#barcp1text');
 
     sephirothHptext.textContent = `PV : ${Sephiroth.pv} /200`;
-    cloudHptext.textContent = `PV : ${Cloud.pv} /250`;
+    cloudHptext.textContent = `PV : ${Cloud.pv} /275`;
     sephirothHp.style.width = Sephiroth.pv/2  + "%";
     cloudHp.style.width = Cloud.pv/2.5   + "%";
     sephirothCp.style.width = Sephiroth.cp*4 + "%";
