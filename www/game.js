@@ -1,12 +1,12 @@
 
 
 
-let Cloud = new Perso('Cloud',250,50,7,4,4,250);
+let Cloud = new Perso('Cloud',275,50,7,4,4,250);
 
 let Sephiroth = new Perso('Sephiroth',200,25,12,2,1,200);
 
 let climHazard = new Skills('Climhazard',5,4);
-let meteoRain = new Skills('Meteorain',35,8);
+let meteoRain = new Skills('Meteorain',22,9);
 
 let potion = {
     name : 'Potion',

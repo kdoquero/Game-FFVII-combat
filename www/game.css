@@ -274,11 +274,11 @@ form {
     height: 70px;
     width: 55px;
     background-image: url('assets/sprites/unit_magic_item_207001005.png');
-    animation : item-x 3s 1 steps(3);
+    animation : item2-x 3s 1 steps(3);
     
 
 }
-@keyframes item-x {
+@keyframes item2-x {
     from {
         background-position-y: 0;
         background-position-x: 0;
