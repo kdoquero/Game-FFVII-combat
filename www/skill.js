@@ -6,4 +6,6 @@ class Skill {
         this.anim = anim;
 
     }
+
+    
 }    

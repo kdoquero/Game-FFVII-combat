@@ -140,7 +140,7 @@ form {
     }
 }
 
-.perso1atk {
+.perso1atk1 {
     height: 110px;
     width: 160px;
     overflow: hidden;
@@ -166,7 +166,7 @@ form {
     }
 }
 
-.perso1skill {
+.perso1atk2 {
     height: 110px;
     width: 160px;
     overflow: hidden;
@@ -192,7 +192,7 @@ form {
     }
 }
 
-.perso1skill2 {
+.perso1atk3 {
     height: 180px;
     width: 375px;
     overflow: hidden;
@@ -218,7 +218,7 @@ form {
     }
 }
 
-.perso1skill3 {
+.perso1Atk4 {
     height: 256px;
     width: 270px;
     overflow: hidden;
