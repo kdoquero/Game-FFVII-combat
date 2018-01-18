@@ -351,7 +351,7 @@ form {
     animation : idle2 1s steps(3) infinite;
 }
 
-.perso2atk {
+.perso2atk1 {
     height: 120px;
     width: 230px;
     background-image: url("assets/sprites/unit_atk_207001005mirror.png");
@@ -377,7 +377,33 @@ form {
     }
 }
 
-.perso2skill {
+.perso2atk2 {
+    height: 120px;
+    width: 230px;
+    background-image: url("assets/sprites/unit_atk_207001006mirror.png");
+    overflow: hidden;
+    animation : skill2-x 0.3s 9 steps(3),
+    skill2-y 2.5s 1 steps(9);
+}
+
+@keyframes skill2-x {
+    from {
+        background-position-x: 0;
+    }
+    to {
+        background-position-x: -771px;
+    }
+}
+@keyframes skill2-y {
+    from {
+        background-position-y: 0;
+    }
+    to {
+        background-position-y: -1431px;
+    }
+}
+
+.perso2atk3 {
     height: 120px;
     width: 230px;
     background-image: url("assets/sprites/unit_atk_207001006mirror.png");
@@ -416,6 +442,26 @@ form {
         background-position-y: 0;
         background-position-x: -432px;
     }
+}
+
+.perso1invo1 {
+    height: 78px;
+    width: 100px;
+    background-image: url('/assets/sprites/unit_magic_207000105bahamut.png');
+    animation : definvo-x 3s infinite steps(3);
+    
+
+}
+@keyframes definvo-x {
+    from {
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+    to {
+        background-position-y: 0;
+        background-position-x: -291px;
+    }
+
 }
 
 .barcontainer1 {

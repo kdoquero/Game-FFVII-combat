@@ -1,5 +1,6 @@
+"use strict"
 class Persorev {
-    constructor(name, pv, cp, str, def, item, maxPv, skills = []) {
+    constructor(name, pv, cp, str, def, item, maxPv, idleAnim ,skills = []) {
         this.name = name;
         this.pv = pv;
         this.cp = cp;
@@ -7,6 +8,8 @@ class Persorev {
         this.def = def;
         this.item = item;
         this.maxPv = maxPv;
+        this.idleAnim = idleAnim;
         this.skills = skills;
+        
     }
 }

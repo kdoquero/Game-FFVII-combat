@@ -1,18 +1,6 @@
+"use strict"
 let cloud = new Cloud();
 let sephiroth = new Sephiroth();
-
-function normalattack(target){
-    let att = this.str + Math.floor((Math.random() * 9) + 0);
-    target.pv = target.pv - att;
-    console.log(`${cloud.name} perd ${cloud.skills[0].cp} cp`)
-    console.log(`${target.name} perd ${att} pv, il lui reste ${target.pv} pv !!!`);
-    return target.pv;
-
-}
-
-
-// cloud.normalAttack(sephiroth,Skill.normalattack);
-// sephiroth.normalAttack(cloud,Skill.normalattack);
 
 let potion = {
     name : 'Potion',
@@ -31,6 +19,7 @@ let manaPot = {
 
 let form = document.querySelector('form');
 let attack = document.querySelector('#attack');
+let invocation = document.querySelector('#invocation');
 let skill = document.querySelector('#skill');
 let block = document.querySelector('#block');
 let item = document.querySelector('#item');
@@ -54,7 +43,15 @@ let audio = document.querySelector('audio');
 
 
 attack.addEventListener('click' , function(event){
+    sephiroth.iaAttack(cloud);
     cloud.attack(sephiroth,0);
+    display();
+    
+});
+invocation.addEventListener('click' , function(event){
+    // let randomId = Math.floor(Math.random() * 3) + 0;
+    cloud.attack(sephiroth,5);
+    display();
     
 });
 
@@ -66,26 +63,61 @@ skill.addEventListener('click' , function(event){
         skillblock.style.display ='flex';
     }
     
-    
 });
 
 skill1.addEventListener('click' , function(event){
-    cloud.contreTaillade(sephiroth,1);
+    cloud.skill(sephiroth,1);
+    display();
     
 });
 
 skill2.addEventListener('click' , function(event){
-    cloud.climHazard(sephiroth,2);
+    cloud.skill(sephiroth,2);
+    display();
    
     
 });
 skill3.addEventListener('click' , function(event){
-    cloud.omniSlash(sephiroth,3);
+    cloud.skill(sephiroth,3);
+    display();
    
     
 });
 
+block.addEventListener('click' , function(event){
+    cloud.actionBlock(sephiroth);
+    display();
+   
+    
+});
 
+function display() {
+    let sephirothHp = document.querySelector('#barpv1');
+    let sephirothHptext = document.querySelector('#barpv1text');
+    let cloudHptext = document.querySelector('#barpv2text');
+    let cloudHp = document.querySelector('#barpv2');
+    let sephirothCp = document.querySelector('#barcp1');
+    let cloudCp = document.querySelector('#barcp2');
+    let cloudCptext = document.querySelector('#barcp2text');
+    let sephirothCptext = document.querySelector('#barcp1text');
+
+    sephirothHptext.textContent = `PV : ${sephiroth.pv} /200`;
+    cloudHptext.textContent = `PV : ${cloud.pv} /275`;
+    sephirothHp.style.width = sephiroth.pv/2  + "%";
+    cloudHp.style.width = cloud.pv/2.5   + "%";
+    sephirothCp.style.width = sephiroth.cp*4 + "%";
+    cloudCp.style.width = cloud.cp*2 + "%";
+    sephirothCptext.textContent = `CP: ${sephiroth.cp} /25`;
+    cloudCptext.textContent = `CP: ${cloud.cp} /50`;
+    // skill1.setAttribute('value', `${climHazard.skillName} : ${climHazard.cpCost} cp`);
+    // skill2.setAttribute('value', `${meteoRain.skillName} : ${meteoRain.cpCost} cp`);
+    // skill3.setAttribute('value', `${omnislash.skillName} : ${omnislash.cpCost} cp`);
+    // item1.setAttribute('value', `${potion.name} : restaure ${potion.hp} pv`);
+    skillblock.style.display ='none';
+
+}
+
+display();
 
 
 
