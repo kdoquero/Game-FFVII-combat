@@ -6,8 +6,10 @@ class Cloud extends Persorev {
         let climHazard = new Skill("Climhazard", 10, 6, "perso1atk3");
         let omniSlash = new Skill("Omnislash", 35, 9, "perso1Atk4");
         let firebolt = new Skill ("Firebolt",6,4,"perso1mag1");
-        let bahamut = new Skill ("Bahamut",50,12,"perso1invo1")
-        let skills = [normalAttack,contreTaillade,climHazard,omniSlash,firebolt,bahamut];
+        let bahamut = new Skill ("Bahamut",50,12,"perso1invo1");
+        let blockAct = new Skill ("Block",0,0,"perso1block");
+        let itemAct = new Skill ('Potion',0,0,"perso1item");
+        let skills = [normalAttack,contreTaillade,climHazard,omniSlash,firebolt,bahamut,blockAct,itemAct];
         super("Cloud", 250, 50, 7, 4, 4, 250,"perso1",skills);
         let _this = this;
     }
@@ -51,7 +53,7 @@ class Cloud extends Persorev {
             perso1.addEventListener('animationend', function() {
             perso1.setAttribute('class', `${_this.idleAnim}`);
             containerPerso.style.justifyContent = "space-around";
-        })
+            })
             console.log(`${this.skills[idAttack].name} de ${this.name}.`)
             this.cp = this.cp - this.skills[idAttack].cp;
             let att = this.str*this.skills[idAttack].str+ Math.floor((Math.random() * 4) + 0);
@@ -65,18 +67,71 @@ class Cloud extends Persorev {
         
     }
 
-    actionBlock(target) {
-        this.pv = this.pv + this.def*2 + Math.floor((Math.random() * 40) + 0) - target.str;
-        this.cp = this.cp + Math.floor((Math.random() * 3) + 1)
-        console.log(`${this.name} bloque ,il lui reste ${this.pv}, l'attaque fait ${target.str} dégats de pv.`);
+    actionBlock(target,idAttack) {
         if (this.hp > this.maxPv)  {
             this.hp = this.maxPv;
             
         }
-        if (this.cp > this.cp)  {
-            this.cp = this.cp;
+        // if (this.cp > this.cp)  {
+        //     this.cp = this.cp;
             
-        }
+        // }
+        let _this = this;
+        perso1.setAttribute('class',`${this.skills[idAttack].anim}`);
+        perso1.addEventListener('animationend', function() {
+        perso1.setAttribute('class', `${_this.idleAnim}`);
+        })
+        this.pv = this.pv + this.def*2 + Math.floor((Math.random() * 40) + 0) - target.str;
+        this.cp = this.cp + Math.floor((Math.random() * 3) + 1)
+        console.log(`${this.name} bloque ,il lui reste ${this.pv}, l'attaque fait ${target.str} dégats de pv.`);
+        
         
     };
+
+    endGame(target1,target2) {
+        if (this.pv <= 0) {
+            perso1.setAttribute('class', 'perso1dead');
+            console.log(`${this.name} died`);
+            gameOver.style.display ="flex";
+    
+            
+        }
+        if (target2.pv <= 0) {
+            perso2.setAttribute('class', 'perso2dead');
+            console.log(`${target2.name} died`);
+            //gameOver.style.display ="flex";
+    
+            
+        }
+    
+    };
+
+    useItem(item,idAttack) {
+        if (this.item == 0) {
+            item1.style.display ='none';
+            item2.style.display ='none';
+            item3.style.display ='none';
+            item4.style.display ='none';
+            console.log('no item left');
+    
+            
+        }
+    
+        if (this.hp >= this.maxPV)  {
+            this.hp = this.maxPV;
+            
+        } else {
+            let _this = this;
+            perso1.setAttribute('class',`${this.skills[idAttack].anim}`);
+            perso1.addEventListener('animationend', function() {
+            perso1.setAttribute('class', `${_this.idleAnim}`);
+            })
+            
+            this.pv = this.pv + item.hp
+            this.item--
+            console.log(`used ${item.name} recovered ${item.hp} pv. ${this.pv} left.` );
+        }
+    };
+
+
 }

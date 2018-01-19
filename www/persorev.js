@@ -12,4 +12,17 @@ class Persorev {
         this.skills = skills;
         
     }
+
+    endGame() {
+        if (this.pv <= 0) {
+            perso1.setAttribute('class', 'perso1dead');
+            console.log(`${target1.name} died`);
+            gameOver.style.display ="flex";
+    
+            
+        }
+    
+    };
+
+    
 }

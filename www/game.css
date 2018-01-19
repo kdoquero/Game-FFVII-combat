@@ -246,7 +246,7 @@ form {
 }
 
 
-.perso1def {
+.perso1block {
     height: 70px;
     width: 55px;
     background-image: url('assets/sprites/unit_magic_def_207000105shi2.png');
@@ -266,7 +266,7 @@ form {
 
 }
 
-.perso2def {
+.perso2block {
     height: 70px;
     width: 130px;
     background-image: url('assets/sprites/unit_magic_def_207001005shi2.png');
@@ -448,11 +448,11 @@ form {
     height: 78px;
     width: 100px;
     background-image: url('/assets/sprites/unit_magic_207000105bahamut.png');
-    animation : definvo-x 3s infinite steps(3);
+    animation : invo-x 3s 1 steps(3);
     
 
 }
-@keyframes definvo-x {
+@keyframes invo-x {
     from {
         background-position-y: 0;
         background-position-x: 0;

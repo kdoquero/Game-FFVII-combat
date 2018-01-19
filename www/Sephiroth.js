@@ -6,7 +6,7 @@ class Sephiroth extends Persorev {
         let xcross = new Skill("X-Cross",15,8,"perso2atk4");
         let atkList = [normalattack, sectionx, spaceSlash,xcross];
 
-        super("Sephiroth", 200, 25, 14, 2, 1, 200,"perso2",atkList);
+        super("Sephiroth", 200, 25, 14, 2, 2, 200,"perso2",atkList);
         let _this = this;
     }
     
@@ -24,8 +24,11 @@ class Sephiroth extends Persorev {
     iaAttack(target) {
         let rand =Math.round(Math.random() * 4)
         if (this.pv < 45 && this.item >=1) {
-            this.useItem(user,hiPotion);
-        } 
+            this.useItem(hiPotion);
+        }
+        if (this.cp < 5 && this.item >=1) {
+            this.useItem(manaPot);
+        }  
         switch (rand) {
             case 0 : this.attack(target,0);
                 break;
@@ -35,7 +38,7 @@ class Sephiroth extends Persorev {
                 break;
             case 3 : this.skill(target,3);
                 break;
-            case 4 : this.
+            case 4 : this.actionBlock(cloud);
 
                 
             default:
@@ -113,5 +116,38 @@ class Sephiroth extends Persorev {
             
         }
         
+    };
+
+    endGame(target1,target2) {
+        if (this.pv <= 0) {
+            perso1.setAttribute('class', 'perso2dead');
+            console.log(`${this.name} died`);
+            gameOver.style.display ="flex";
+    
+            
+        }
+    
+    };
+
+    useItem(item) {
+        if (this.item == 0) {
+            item1.style.display ='none';
+            item2.style.display ='none';
+            item3.style.display ='none';
+            item4.style.display ='none';
+            console.log('no item left');
+    
+            
+        }
+    
+        if (this.hp >= this.maxPV)  {
+            this.hp = this.maxPV;
+            
+        } else {
+            
+            this.pv = this.pv + item.hp
+            this.item--
+            console.log(`used ${this.name} recovered ${this.hp} pv. ${this.pv} left.` );
+        }
     };
 }

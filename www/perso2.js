@@ -4,12 +4,12 @@ let sephiroth = new Sephiroth();
 
 let potion = {
     name : 'Potion',
-    hp : 50
+    hp : 75
 }
 
 let hiPotion = {
     name : 'hi-potion',
-    hp : 100
+    hp : 125
 }
 
 let manaPot = {
@@ -41,16 +41,36 @@ let perso1 = document.querySelector('.perso1');
 let perso2 = document.querySelector('.perso2');
 let audio = document.querySelector('audio');
 
+function endGame(target1,target2) {
+    if (target1.pv <= 0) {
+        perso1.setAttribute('class', 'perso1dead');
+        console.log(`${target1.name} died`);
+        gameOver.style.display ="flex";
+
+        
+    }
+    if (target2.pv <= 0) {
+        perso2.setAttribute('class', 'perso2dead');
+        console.log(`${target2.name} died`);
+        gameOver.style.display ="flex";
+
+        
+    }
+
+};
+
 
 attack.addEventListener('click' , function(event){
-    sephiroth.iaAttack(cloud);
     cloud.attack(sephiroth,0);
+    sephiroth.iaAttack(cloud);
+    endGame(cloud,sephiroth);
     display();
     
 });
 invocation.addEventListener('click' , function(event){
-    // let randomId = Math.floor(Math.random() * 3) + 0;
-    cloud.attack(sephiroth,5);
+    cloud.skill(sephiroth,5);
+    sephiroth.iaAttack(cloud);
+    endGame(cloud,sephiroth);
     display();
     
 });
@@ -67,17 +87,24 @@ skill.addEventListener('click' , function(event){
 
 skill1.addEventListener('click' , function(event){
     cloud.skill(sephiroth,1);
+    sephiroth.iaAttack(cloud);
+    endGame(cloud,sephiroth);
+
     display();
     
 });
 
 skill2.addEventListener('click' , function(event){
     cloud.skill(sephiroth,2);
+    sephiroth.iaAttack(cloud);
+    endGame(cloud,sephiroth);
     display();
    
     
 });
 skill3.addEventListener('click' , function(event){
+    sephiroth.iaAttack(cloud);
+    endGame(cloud,sephiroth);
     cloud.skill(sephiroth,3);
     display();
    
@@ -85,9 +112,34 @@ skill3.addEventListener('click' , function(event){
 });
 
 block.addEventListener('click' , function(event){
-    cloud.actionBlock(sephiroth);
+    sephiroth.iaAttack(cloud);
+    endGame(cloud,sephiroth);
+    cloud.actionBlock(sephiroth,6);
     display();
    
+    
+});
+item.addEventListener('click' , function(event){
+    if (itemblock.style.display =='flex') {
+        itemblock.style.display ='none';
+        
+    }else {
+        itemblock.style.display ='flex';
+    }
+});
+
+
+item1.addEventListener('click' , function(event){
+    sephiroth.iaAttack(cloud);
+    cloud.useItem(potion,7);
+    display();
+    
+});
+
+item2.addEventListener('click' , function(event){
+    sephiroth.iaAttack(cloud);
+    cloud.useItem(hiPotion,7);
+    display();
     
 });
 
