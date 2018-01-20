@@ -1,5 +1,5 @@
 "use strict"
-class Cloud extends Persorev {
+class Perso1 extends Persorev {
     constructor(){
         let normalAttack = new Skill("Attack", 1, 1,"perso1atk1");
         let contreTaillade = new Skill("Contre-taillade", 5, 3,"perso1atk2");
@@ -9,12 +9,33 @@ class Cloud extends Persorev {
         let bahamut = new Skill ("Bahamut",50,12,"perso1invo1");
         let blockAct = new Skill ("Block",0,0,"perso1block");
         let itemAct = new Skill ('Potion',0,0,"perso1item");
-        let skills = [normalAttack,contreTaillade,climHazard,omniSlash,firebolt,bahamut,blockAct,itemAct];
+        let deadPerso1 = new Skill ('dead',0,0,"perso1dead");
+        let skills = [normalAttack,contreTaillade,climHazard,omniSlash,firebolt,bahamut,blockAct,itemAct,deadPerso1];
         super("Cloud", 250, 50, 7, 4, 4, 250,"perso1",skills);
         let _this = this;
     }
 
+    endGame(idAttack) {
+        let _this = this;
+        if (this.pv <= 0) {
+            perso1.setAttribute('class',`${this.skills[idAttack].anim}`);
+            console.log(`${this.name} died`);
+            perso1.addEventListener('animationend', function() {
+                perso1.setAttribute('class',`${_this.idleAnim}`);
+                containerPerso.style.justifyContent = "space-around";
+            })
+            gameOver.style.display ="flex";
+    
+            
+        }
+
+    
+    };
+
     attack(target,idAttack){
+        if (target.pv <= 0) {
+            gameOver.style.display ="flex";
+        }
         let _this = this;
         let att = this.str + Math.floor((Math.random() * 9) + 0);
         target.pv = target.pv - att;
@@ -25,11 +46,15 @@ class Cloud extends Persorev {
         perso1.setAttribute('class',`${_this.idleAnim}`);
         containerPerso.style.justifyContent = "space-around";
         })
+
     };
 
     
 
     skill(target,idAttack) {
+        if (target.pv <= 0) {
+            gameOver.style.display ="flex";
+        }
         let _this = this;
         if (this.cp < this.skills[idAttack].cp) {
             perso1.setAttribute('class',`${this.skills[0].anim}`);
@@ -92,14 +117,11 @@ class Cloud extends Persorev {
         if (this.pv <= 0) {
             perso1.setAttribute('class', 'perso1dead');
             console.log(`${this.name} died`);
-            gameOver.style.display ="flex";
-    
             
         }
         if (target2.pv <= 0) {
             perso2.setAttribute('class', 'perso2dead');
             console.log(`${target2.name} died`);
-            //gameOver.style.display ="flex";
     
             
         }

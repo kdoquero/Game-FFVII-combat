@@ -390,7 +390,6 @@ function display() {
     item1.setAttribute('value', `${potion.name} : restaure ${potion.hp} pv`);
     skillblock.style.display ='none';
 
-4
 }
 
 display();

@@ -1,10 +1,14 @@
-class Sephiroth extends Persorev {
+class Perso2 extends Persorev {
     constructor(){
         let normalattack = new Skill("Attack", 0, 1, "perso2atk1");
         let sectionx = new Skill("Section", 4, 2, "perso2atk2");
         let spaceSlash = new Skill("SpaceSlash", 9, 4,"perso2atk3");
         let xcross = new Skill("X-Cross",15,8,"perso2atk4");
-        let atkList = [normalattack, sectionx, spaceSlash,xcross];
+
+        let blockAct2 = new Skill ("Block",0,0,"perso2block");
+        let itemAct2 = new Skill ('Potion',0,0,"perso2item");
+        let deadPerso2 = new Skill ('dead',0,0,"perso2dead");
+        let atkList = [normalattack, sectionx, spaceSlash,xcross,blockAct2,itemAct2,deadPerso2];
 
         super("Sephiroth", 200, 25, 14, 2, 2, 200,"perso2",atkList);
         let _this = this;
@@ -22,12 +26,12 @@ class Sephiroth extends Persorev {
     //     };
     // };
     iaAttack(target) {
-        let rand =Math.round(Math.random() * 4)
+        let rand =Math.round(Math.random() * 5)
         if (this.pv < 45 && this.item >=1) {
-            this.useItem(hiPotion);
+            this.useItem(hiPotion,5);
         }
         if (this.cp < 5 && this.item >=1) {
-            this.useItem(manaPot);
+            this.useCpItem(manaPot);
         }  
         switch (rand) {
             case 0 : this.attack(target,0);
@@ -38,7 +42,10 @@ class Sephiroth extends Persorev {
                 break;
             case 3 : this.skill(target,3);
                 break;
-            case 4 : this.actionBlock(cloud);
+            case 4 : this.actionBlock(cloud,4);
+                break;
+            // case 5 : this.useItem(hiPotion);
+            //     break;
 
                 
             default:
@@ -49,6 +56,9 @@ class Sephiroth extends Persorev {
     };
     
     attack(target,idAttack){
+        if (target.pv <= 0) {
+            gameOver.style.display ="flex";
+        }
         let _this = this;
         let att = this.str + Math.floor((Math.random() * 9) + 0);
         target.pv = target.pv - att;
@@ -65,9 +75,8 @@ class Sephiroth extends Persorev {
 
     skill(target,idAttack) {
         let _this = this;
-        if (idAttack == 0) {
-            this.attack(target,0);
-            
+        if (target.pv <= 0) {
+            gameOver.style.display ="flex";
         }
         if (this.cp < this.skills[idAttack].cp) {
             perso2.setAttribute('class',`${this.skills[0].anim}`);
@@ -103,18 +112,24 @@ class Sephiroth extends Persorev {
         
     }
 
-    actionBlock(target) {
-        this.pv = this.pv + this.def*2 + Math.floor((Math.random() * 40) + 0) - target.str;
-        this.cp = this.cp + Math.floor((Math.random() * 3) + 1)
-        console.log(`${this.name} bloque ,il lui reste ${this.pv}, l'attaque fait ${target.str} dégats de pv.`);
+    actionBlock(target,idAttack) {
         if (this.hp > this.maxPv)  {
             this.hp = this.maxPv;
             
         }
-        if (this.cp > this.cp)  {
-            this.cp = this.cp;
+        // if (this.cp > this.cp)  {
+        //     this.cp = this.cp;
             
-        }
+        // }
+        let _this = this;
+        perso2.setAttribute('class',`${this.skills[idAttack].anim}`);
+        perso2.addEventListener('animationend', function() {
+        perso2.setAttribute('class', `${_this.idleAnim}`);
+        })
+        this.pv = this.pv + this.def*2 + Math.floor((Math.random() * 40) + 0) - target.str;
+        this.cp = this.cp + Math.floor((Math.random() * 3) + 1)
+        console.log(`${this.name} bloque ,il lui reste ${this.pv}, l'attaque fait ${target.str} dégats de pv.`);
+        
         
     };
 
@@ -129,7 +144,7 @@ class Sephiroth extends Persorev {
     
     };
 
-    useItem(item) {
+    useItem(item,idAttack) {
         if (this.item == 0) {
             item1.style.display ='none';
             item2.style.display ='none';
@@ -144,10 +159,36 @@ class Sephiroth extends Persorev {
             this.hp = this.maxPV;
             
         } else {
-            
+            let _this = this;
+            perso2.setAttribute('class',`${this.skills[idAttack].anim}`);
+            perso2.addEventListener('animationend', function() {
+            perso2.setAttribute('class', `${_this.idleAnim}`);
+            });
             this.pv = this.pv + item.hp
             this.item--
             console.log(`used ${this.name} recovered ${this.hp} pv. ${this.pv} left.` );
+        }
+    };
+
+    useCpItem(item) {
+        if (this.item == 0) {
+            item1.style.display ='none';
+            item2.style.display ='none';
+            item3.style.display ='none';
+            item4.style.display ='none';
+            console.log('no item left');
+    
+            
+        }
+    
+        if (this.cp >= this.maxCp)  {
+            this.cp = this.maxcp;
+            
+        } else {
+            
+            this.cp = this.cp + item.cp
+            this.item--
+            console.log(`used ${this.name} recovered ${item.cp} cp. ${this.cp} cp left.` );
         }
     };
 }

@@ -308,7 +308,7 @@ form {
 
 .perso2item {
     height: 70px;
-    width: 55px;
+    width: 129px;
     background-image: url('assets/sprites/unit_magic_item_207001005.png');
     animation : item2-x 3s 1 steps(3);
     
@@ -352,7 +352,7 @@ form {
 }
 
 .perso2atk1 {
-    height: 120px;
+    height: 138px;
     width: 230px;
     background-image: url("assets/sprites/unit_atk_207001005mirror.png");
     overflow: hidden;
@@ -378,7 +378,7 @@ form {
 }
 
 .perso2atk2 {
-    height: 120px;
+    height: 138px;
     width: 230px;
     background-image: url("assets/sprites/unit_atk_207001006mirror.png");
     overflow: hidden;
@@ -404,13 +404,14 @@ form {
 }
 
 .perso2atk3 {
-    height: 120px;
+    height: 138px;
     width: 230px;
     background-image: url("assets/sprites/unit_atk_207001006mirror.png");
     overflow: hidden;
     animation : skill2-x 0.3s 9 steps(3),
     skill2-y 2.5s 1 steps(9);
 }
+
 
 @keyframes skill2-x {
     from {
@@ -443,6 +444,33 @@ form {
         background-position-x: -432px;
     }
 }
+
+.perso2atk4 {
+    height: 186px;
+    width: 532px;
+    background-image: url("assets/sprites/unit_limit_atk_207001005mirror.png");
+    overflow: hidden;
+    animation : skill2-4-x 0.3s 15 steps(3),
+    skill2-4-y 2.5s 1 steps(15);
+}
+
+@keyframes skill2-4-x {
+    from {
+        background-position-x: 0;
+    }
+    to {
+        background-position-x: -3030px;
+    }
+}
+@keyframes skill2-4-y {
+    from {
+        background-position-y: 0;
+    }
+    to {
+        background-position-y: -2850px;
+    }
+}
+
 
 .perso1invo1 {
     height: 78px;
