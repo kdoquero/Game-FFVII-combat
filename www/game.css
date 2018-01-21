@@ -23,7 +23,7 @@ h3 {
     margin: 0;
 }
 main {
-    width: 25%;
+    width: 75%;
     margin-top: 30px;
 
 }
@@ -48,6 +48,12 @@ main {
     margin: 0;
 }
 
+#log {
+    overflow: hidden;
+    color: white;
+    height: 97px;
+    width: 500px;
+}
 
 input[type=button] {
     background-color: rgba(17, 1, 165, 0);
@@ -174,7 +180,7 @@ form {
     height: 110px;
     width: 160px;
     overflow: hidden;
-    background-image: url("assets/sprites/unit_atk_207000106.png");
+    background-image: url("assets/sprites/unit_atk_207000106kai.png");
     animation : skill1-x 1s 4 steps(3),
     skill1-y 2.5s 1 steps(4);
 }
@@ -227,8 +233,8 @@ form {
     width: 270px;
     overflow: hidden;
     background-image: url("assets/sprites/unit_limit_atk2_207000105.png");
-    animation : skill33-x 4s 30 steps(3),
-    skill33-y 4s 1 steps(30);
+    animation : skill33-x 4s 60 steps(3),
+    skill33-y 4s 2 steps(30);
 
 }
 
@@ -269,6 +275,27 @@ form {
     }
 
 }
+
+.perso1mag1 {
+    height: 70px;
+    width: 55px;
+    background-image: url('assets/sprites/unit_magic_atk_207000105.png');
+    animation : magick1-x 3s 1 steps(3);
+    
+
+}
+@keyframes magic1-x {
+    from {
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+    to {
+        background-position-y: 0;
+        background-position-x: -152px;
+    }
+
+}
+
 
 .perso2block {
     height: 70px;
@@ -331,20 +358,45 @@ form {
 }
 
 .perso1dead {
-    height: 40px;
-    width: 125px;
-    background-image: url('assets/sprites/unit_dead_207000105.png');
-    transition: 0.1s;
+    height: 63px;
+    width: 86px;
+    background-image: url('assets/sprites/unit_idle_207000105_dead.png');
+    animation: dead1-x 4s 1 steps(3);
+
+}
+
+@keyframes dead1-x {
+    from {
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+    to {
+        background-position-y: 0;
+        background-position-x: -258px;
+    }
 
 }
 
 .perso2dead {
-    height: 40px;
-    width: 80px;
-    background-image: url('assets/sprites/unit_dead_207001005.png');
-    transition: 0.1s;
+    height: 63px;
+    width: 126px;
+    background-image: url('assets/sprites/unit_idle_207001005_dead.png');
+    animation: dead2-x 4s 1 steps(3);
 
 }
+
+@keyframes dead2-x {
+    from {
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+    to {
+        background-position-y: 0;
+        background-position-x: -372px;
+    }
+
+}
+
 
 
 .perso2 {
@@ -355,6 +407,35 @@ form {
     animation : idle2 1s steps(3) infinite;
 }
 
+@keyframes idle2 {
+    from {
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+    to {
+        background-position-y: 0;
+        background-position-x: -432px;
+    }
+}
+
+.cloudfire {
+    display: block;
+    height: 86px;
+    width: 150px;
+    background-image: url("assets/sprites/unit_idle_207001005fire.png");
+    animation : idle2 4s 2 steps(3);
+}
+
+@keyframes idle2 {
+    from {
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+    to {
+        background-position-y: 0;
+        background-position-x: -432px;
+    }
+}
 .perso2atk1 {
     height: 138px;
     width: 230px;
@@ -496,6 +577,27 @@ form {
 
 }
 
+.perso2invo1 {
+    height: 78px;
+    width: 125px;
+    background-image: url('assets/sprites/unit_magic_atk_207001005malb.png');
+    animation : invo2-x 3s 1 steps(3);
+    
+
+}
+@keyframes invo2-x {
+    from {
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+    to {
+        background-position-y: 0;
+        background-position-x: -375px;
+    }
+
+}
+
+
 .barcontainer1 {
     height: 15px;
     width: 200px;
@@ -573,6 +675,14 @@ form {
     width: 100%;
     height: 100%;
     background-image: url("assets/images/game over.jpg");
+    background-repeat: no-repeat;
+    background-size: inherit;
     z-index: 100;
+    display: none;
+    transition: ease-in 5s;
+}
+
+#limitbreak {
+    color: red;
     display: none;
 }

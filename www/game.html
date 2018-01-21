@@ -10,8 +10,10 @@
 </head>
 
 <body>
+    <div id="gameover">
 
-    <section class="container-column " id="gameover">
+    </div>
+    <section class="container-column ">
         <div class="menu container-column container-game">
             <div class="container-row container-barres">
                 <div class="container-column">
@@ -67,6 +69,7 @@
         <main class="menu container-row">
             <form class="container-row">
                 <input type="button" value="Attack" id="attack">
+                <input type="button" value="LimitBreak !!!" id="limitbreak">
                 <input type="button" value="Skill" id="skill">
                 <input type="button" value="Invocation" id="invocation">
                 <input type="button" value="Block" id="block">
@@ -93,17 +96,13 @@
                 <li>
                     <input type="button" value="item2" id="item2">
                 </li>
-                <li>
-                    <input type="button" value="item3" id="item3">
-                </li>
-                <li>
-                    <input type="button" value="item4" id="item4">
-                </li>
             </ul>
 
         </main>
+        <textarea class="menu" id="log"></textarea>
 
     </section>
+    
     <script src="skill.js"></script>
     <script src="persorev.js"></script>
     <script src="Cloud.js"></script>

@@ -2,10 +2,6 @@
 let cloud = new Perso1;
 let sephiroth = new Perso2;
 
-let potion = {
-    name : 'Potion',
-    hp : 75
-}
 
 let hiPotion = {
     name : 'hi-potion',
@@ -39,38 +35,34 @@ let gameOver = document.querySelector('#gameover');
 let containerPerso = document.querySelector('.container-perso');
 let perso1 = document.querySelector('.perso1');
 let perso2 = document.querySelector('.perso2');
+let limitBreakButton = document.querySelector('#limitbreak');
 let themesong = new Audio("assets/final-fantasy-vii-last-stand2.mp3");
+let body = document.querySelector('body');
+let logs = document.querySelector('#log');
 themesong.play();
 themesong.loop = true;
-themesong.volume = 0.3;
+themesong.volume = 0.15;
+display();
 
-function endGame(target1,target2) {
-    if (target1.pv <= 0) {
-        perso1.setAttribute('class', 'perso1dead');
-        console.log(`${target1.name} died`);
-        
-    }
-    if (target2.pv <= 0) {
-        perso2.setAttribute('class', 'perso2dead');
-        console.log(`${target2.name} died`);
-
-        
-    }
-
-};
 
 
 attack.addEventListener('click' , function(event){
-    cloud.attack(sephiroth,0);
-    sephiroth.iaAttack(cloud);
-    endGame(cloud,sephiroth);
+    cloud.attack(sephiroth,0,perso1);
+    sephiroth.iaAttack(cloud,perso2);
     display();
     
 });
+
+limitBreakButton.addEventListener('click' , function(event){
+    cloud.limitBreakSkill(sephiroth,3,perso1);
+    sephiroth.iaAttack(cloud,perso2);
+    display();
+    
+});
+
 invocation.addEventListener('click' , function(event){
-    cloud.summon(sephiroth,5);
-    sephiroth.iaAttack(cloud);
-    endGame(cloud,sephiroth);
+    cloud.summon(sephiroth,5,perso1,perso2);
+    sephiroth.iaAttack(cloud,perso2);
     display();
     
 });
@@ -86,37 +78,35 @@ skill.addEventListener('click' , function(event){
 });
 
 skill1.addEventListener('click' , function(event){
-    cloud.skill(sephiroth,1);
-    sephiroth.iaAttack(cloud);
-    endGame(cloud,sephiroth);
+    cloud.skill(sephiroth,1,perso1);
+    sephiroth.iaAttack(cloud,perso2);
 
     display();
     
 });
 
 skill2.addEventListener('click' , function(event){
-    cloud.skill(sephiroth,2);
-    sephiroth.iaAttack(cloud);
-    endGame(cloud,sephiroth);
+    cloud.skill(sephiroth,2,perso1);
+    sephiroth.iaAttack(cloud,perso2);
+   
     display();
    
     
 });
 skill3.addEventListener('click' , function(event){
-    sephiroth.iaAttack(cloud);
-    endGame(cloud,sephiroth);
-    cloud.skill(sephiroth,3);
+    cloud.magick(sephiroth,4,perso1);
+    sephiroth.iaAttack(cloud,perso2);
     display();
+
    
     
 });
 
 block.addEventListener('click' , function(event){
-    sephiroth.iaAttack(cloud);
-    endGame(cloud,sephiroth);
-    cloud.actionBlock(sephiroth,6);
+    sephiroth.iaAttack(cloud,perso2);
+    cloud.actionBlock(sephiroth,6,perso1);
     display();
-    endGame(cloud,sephiroth);
+
    
     
 });
@@ -131,18 +121,16 @@ item.addEventListener('click' , function(event){
 
 
 item1.addEventListener('click' , function(event){
-    sephiroth.iaAttack(cloud);
-    cloud.useItem(potion,7);
+    sephiroth.iaAttack(cloud,perso2);
+    cloud.useItem(hiPotion,7,perso1);
     display();
-    endGame(cloud,sephiroth);
     
 });
 
 item2.addEventListener('click' , function(event){
-    sephiroth.iaAttack(cloud);
-    cloud.useItem(hiPotion,7);
+    sephiroth.iaAttack(cloud,perso2);
+    cloud.useCpItem(manaPot,7,perso1);
     display();
-    endGame(cloud,sephiroth);
     
 });
 
@@ -164,17 +152,46 @@ function display() {
     cloudCp.style.width = cloud.cp*2 + "%";
     sephirothCptext.textContent = `CP: ${sephiroth.cp} /35`;
     cloudCptext.textContent = `CP: ${cloud.cp} /50`;
-    // skill1.setAttribute('value', `${climHazard.skillName} : ${climHazard.cpCost} cp`);
+    skill1.setAttribute('value', `${cloud.skills[1].name} : ${cloud.skills[1].cp} cp`);
     // skill2.setAttribute('value', `${meteoRain.skillName} : ${meteoRain.cpCost} cp`);
     // skill3.setAttribute('value', `${omnislash.skillName} : ${omnislash.cpCost} cp`);
     // item1.setAttribute('value', `${potion.name} : restaure ${potion.hp} pv`);
     skillblock.style.display ='none';
     itemblock.style.display ='none';
+    cloud.showLimitBreak();
+    cloud.endGame(perso1);
+    sephiroth.endGame(perso2);
+    logs.scrollTop = logs.scrollHeight;
+
 }
 
 
+(function (logger) {
+    console.old = console.log;
+    console.log = function () {
+        var output = "", arg, i;
 
-display();
+        for (i = 0; i < arguments.length; i++) {
+            arg = arguments[i];
+            output += "<span class=\"log-" + (typeof arg) + "\">";
+
+            if (
+                typeof arg === "object" &&
+                typeof JSON === "object" &&
+                typeof JSON.stringify === "function"
+            ) {
+                output += JSON.stringify(arg);   
+            } else {
+                output += arg;   
+            }
+
+            output += "</span>&nbsp;";
+        }
+
+        logger.innerHTML += output + "<br>";
+        console.old.apply(undefined, arguments);
+    };
+})(document.getElementById("log"));
 
 
 
