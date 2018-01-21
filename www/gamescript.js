@@ -172,6 +172,8 @@ function display() {
     itemblock.style.display ='none';
 }
 
+
+
 display();
 
 
