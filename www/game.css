@@ -572,3 +572,7 @@ form {
     height: 100%;
    
 }
+
+#gameover {
+    background-image: url("assets/images/game over.jpg");
+}
