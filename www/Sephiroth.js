@@ -1,30 +1,19 @@
 class Perso2 extends Persorev {
     constructor(){
-        let normalattack = new Skill("Attack", 0, 1, "perso2atk1");
+        let normalattack = new Skill("Attack", 0, 1, "perso2atk1","assets/audio/hit.wav");
         let sectionx = new Skill("Section", 4, 2, "perso2atk2");
         let spaceSlash = new Skill("SpaceSlash", 9, 4,"perso2atk3");
-        let xcross = new Skill("X-Cross",15,8,"perso2atk4");
+        let xcross = new Skill("X-Cross",25,8,"perso2atk4");
+        let xzoolomid = new Skill("Xzoolomid",0,11,"perso2invoc","asset/audio/hit.wav");
 
-        let blockAct2 = new Skill ("Block",0,0,"perso2block");
+        let blockAct2 = new Skill ("Block",0,0,"perso2block","assets/audio/shield block.wav");
         let itemAct2 = new Skill ('Potion',0,0,"perso2item");
         let deadPerso2 = new Skill ('dead',0,0,"perso2dead");
-        let atkList = [normalattack, sectionx, spaceSlash,xcross,blockAct2,itemAct2,deadPerso2];
 
-        super("Sephiroth", 200, 25, 14, 2, 2, 200,"perso2",atkList);
+        super("Sephiroth", 200, 35, 14, 2, 2, 200,"perso2",[normalattack, sectionx, spaceSlash,xcross,blockAct2,itemAct2,deadPerso2],35,1);
         let _this = this;
     }
     
-    // iaAttack(target) {
-    //     let randArray = [this.attack,this.skill];
-    //     let atkRand = randArray.splice(Math.floor(Math.random()*randArray.length),1)[0];
-    //     let randomId = Math.floor(Math.random() * 2) + 0;  
-       
-    //     if (this.pv < 55 && this.item >=1) {
-    //         useItem(user,hiPotion);
-    //     } else {
-    //         atkRand(target,randomId);
-    //     };
-    // };
     iaAttack(target) {
         let rand =Math.round(Math.random() * 5)
         if (this.pv < 45 && this.item >=1) {
@@ -65,11 +54,47 @@ class Perso2 extends Persorev {
         console.log(`${target.name} perd ${att} pv, il lui reste ${target.pv} pv !!!`);
         perso2.setAttribute('class',`${this.skills[idAttack].anim}`);
         containerPerso.style.justifyContent = "center";
+        let hitAudio = new Audio(this.skills[idAttack].audio);
+        hitAudio.play();
         perso2.addEventListener('animationend', function() {
         perso2.setAttribute('class',`${_this.idleAnim}`);
         containerPerso.style.justifyContent = "space-around";
         })
     };
+
+    summon(target,idAttack){
+        if (target.pv <= 0) {
+            gameOver.style.display ="flex";
+        }
+        if (this.summonCount <=0) {
+            console.log("pouvoir d'invocation deja utilisé, attaque nulle");
+        }
+        if (this.cp < this.maxCP/2 && this.summonCount >= 1) {
+            console.log(` Demi-Invocation de ${this.skills[idAttack].name}.`)
+            let att = this.skills[idAttack].str+ Math.floor((Math.random() * 75) + 25);
+            target.pv = target.pv - att;
+            console.log(`pas assez de cp pour une full attaque,degats max divisé par 2 !${target.name} perd ${att} pv, il lui reste ${target.pv} pv !!!`);
+        } 
+        if (this.cp >= this.maxCP/2 && this.summonCount >= 1) {
+            console.log(`Invocation de ${this.skills[idAttack].name}.`)
+            let att = this.skills[idAttack].str+ Math.floor((Math.random() * 200) + 50);
+            target.pv = target.pv - att;
+            console.log(`${target.name} perd ${att} pv, il lui reste ${target.pv} pv !!!`);
+        }
+        let _this = this;
+        perso1.setAttribute('class',this.skills[idAttack].anim);
+        containerPerso.style.justifyContent = "center";
+        let hitAudio = new Audio(this.skills[idAttack].audio);
+        hitAudio.play();
+        this.cp = 0;
+        perso1.addEventListener('animationend', function() {
+        perso1.setAttribute('class',`${_this.idleAnim}`);
+        containerPerso.style.justifyContent = "space-around";
+        });
+        this.summonCount--;
+
+    };
+    
 
     
 
@@ -137,7 +162,6 @@ class Perso2 extends Persorev {
         if (this.pv <= 0) {
             perso1.setAttribute('class', 'perso2dead');
             console.log(`${this.name} died`);
-            gameOver.style.display ="flex";
     
             
         }

@@ -39,20 +39,20 @@ let gameOver = document.querySelector('#gameover');
 let containerPerso = document.querySelector('.container-perso');
 let perso1 = document.querySelector('.perso1');
 let perso2 = document.querySelector('.perso2');
-let audio = document.querySelector('audio');
+let themesong = new Audio("assets/final-fantasy-vii-last-stand2.mp3");
+themesong.play();
+themesong.loop = true;
+themesong.volume = 0.3;
 
 function endGame(target1,target2) {
     if (target1.pv <= 0) {
         perso1.setAttribute('class', 'perso1dead');
         console.log(`${target1.name} died`);
-        gameOver.style.display ="flex";
-
         
     }
     if (target2.pv <= 0) {
         perso2.setAttribute('class', 'perso2dead');
         console.log(`${target2.name} died`);
-        gameOver.style.display ="flex";
 
         
     }
@@ -68,7 +68,7 @@ attack.addEventListener('click' , function(event){
     
 });
 invocation.addEventListener('click' , function(event){
-    cloud.skill(sephiroth,5);
+    cloud.summon(sephiroth,5);
     sephiroth.iaAttack(cloud);
     endGame(cloud,sephiroth);
     display();
@@ -116,6 +116,7 @@ block.addEventListener('click' , function(event){
     endGame(cloud,sephiroth);
     cloud.actionBlock(sephiroth,6);
     display();
+    endGame(cloud,sephiroth);
    
     
 });
@@ -133,6 +134,7 @@ item1.addEventListener('click' , function(event){
     sephiroth.iaAttack(cloud);
     cloud.useItem(potion,7);
     display();
+    endGame(cloud,sephiroth);
     
 });
 
@@ -140,6 +142,7 @@ item2.addEventListener('click' , function(event){
     sephiroth.iaAttack(cloud);
     cloud.useItem(hiPotion,7);
     display();
+    endGame(cloud,sephiroth);
     
 });
 
@@ -154,19 +157,19 @@ function display() {
     let sephirothCptext = document.querySelector('#barcp1text');
 
     sephirothHptext.textContent = `PV : ${sephiroth.pv} /200`;
-    cloudHptext.textContent = `PV : ${cloud.pv} /275`;
+    cloudHptext.textContent = `PV : ${cloud.pv} /250`;
     sephirothHp.style.width = sephiroth.pv/2  + "%";
     cloudHp.style.width = cloud.pv/2.5   + "%";
-    sephirothCp.style.width = sephiroth.cp*4 + "%";
+    sephirothCp.style.width = sephiroth.cp*2.857142857 + "%";
     cloudCp.style.width = cloud.cp*2 + "%";
-    sephirothCptext.textContent = `CP: ${sephiroth.cp} /25`;
+    sephirothCptext.textContent = `CP: ${sephiroth.cp} /35`;
     cloudCptext.textContent = `CP: ${cloud.cp} /50`;
     // skill1.setAttribute('value', `${climHazard.skillName} : ${climHazard.cpCost} cp`);
     // skill2.setAttribute('value', `${meteoRain.skillName} : ${meteoRain.cpCost} cp`);
     // skill3.setAttribute('value', `${omnislash.skillName} : ${omnislash.cpCost} cp`);
     // item1.setAttribute('value', `${potion.name} : restaure ${potion.hp} pv`);
     skillblock.style.display ='none';
-
+    itemblock.style.display ='none';
 }
 
 display();
