@@ -483,7 +483,7 @@ form {
 .perso1invo1 {
     height: 78px;
     width: 100px;
-    background-image: url('/assets/sprites/unit_magic_207000105bahamut.png');
+    background-image: url('assets/sprites/unit_magic_207000105bahamut.png');
     animation : invo-x 3s 1 steps(3);
     
 
