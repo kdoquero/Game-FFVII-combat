@@ -49,6 +49,7 @@ main {
 }
 
 #log {
+    margin-top: 10px;
     overflow: hidden;
     color: white;
     height: 97px;

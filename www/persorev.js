@@ -1,6 +1,6 @@
 "use strict"
 class Persorev {
-    constructor(name, pv, cp, str, def, item, maxPv, idleAnim ,skills = [],maxCp,summonCount,limitBreak,deadAnim) {
+    constructor(name, pv, cp, str, def, item, maxPv, idleAnim ,skills = [],maxCp,summonCount,limitBreak,deadAnim,id) {
         this.name = name;
         this.pv = pv;
         this.cp = cp;
@@ -14,36 +14,37 @@ class Persorev {
         this.summonCount = summonCount;
         this.limitBreak = limitBreak;
         this.deadAnim = deadAnim;
+        this.id = id;
         
     }
 
-    iaAttack(target,idPerso) {
-        let rand =Math.round(Math.random() * 5)
+    iaAttack(target) {
+        let rand = Math.round(Math.random() * 5);
         if (this.pv < 45 && this.item >=1) {
-            this.useItem(hiPotion,5,perso2);
+            this.useItem(hiPotion,5);
     
-        }
-        if (this.cp < 5 && this.item >=1) {
+        } else if (this.cp < 5 && this.item >=1) {
             this.useCpItem(manaPot);
 
-        } else switch (rand) {
-            case 0 : this.attack(target,0,idPerso);
+        } else { 
+        switch (rand) {
+            case 0 : this.attack(target,0);
                 break;
-            case 1 : this.skill(target,1,idPerso);
+            case 1 : this.skill(target,1);
                 break;
-            case 2 : this.skill(target,2,idPerso);
+            case 2 : this.skill(target,2);
                 break;
-            case 3 : this.skill(target,3,idPerso);
+            case 3 : this.skill(target,3);
                 break;
-            case 4 : this.actionBlock(target,4,idPerso);
+            case 4 : this.actionBlock(target,4);
                 break;
-            case 5 : this.summon(target,7,idPerso);
+            case 5 : this.summon(target,7);
 
                 
             default:
                 break;
         }    
-    
+    }
         
     };
 
@@ -57,24 +58,24 @@ class Persorev {
         }
     }
 
-    attack(target,idAttack,idPerso){
+    attack(target,idAttack){
         let _this = this;
         this.limitBreak = this.limitBreak + Math.floor((Math.random() * 25) + 3);
         let att = this.str + Math.floor((Math.random() * 9) + 0);
         target.pv = target.pv - att;
         console.log(`${target.name} perd ${att} pv, il lui reste ${target.pv} pv !!!`);
-        idPerso.setAttribute('class',this.skills[idAttack].anim);
+        this.id.setAttribute('class',this.skills[idAttack].anim);
         containerPerso.style.justifyContent = "center";
         let hitAudio = new Audio(this.skills[idAttack].audio);
         hitAudio.play();
-        idPerso.addEventListener('animationend', function() {
-        idPerso.setAttribute('class',`${_this.idleAnim}`);
+        this.id.addEventListener('animationend', function() {
+        _this.id.setAttribute('class',`${_this.idleAnim}`);
         containerPerso.style.justifyContent = "space-around";
         })
 
     };
 
-    summon(target,idAttack,idPerso,idtarget,idDef){
+    summon(target,idAttack){
         if (this.summonCount <=0) {
             console.log("pouvoir d'invocation deja utilisé, attaque nulle");
         }
@@ -92,13 +93,13 @@ class Persorev {
         }
         this.limitBreak = this.limitBreak + Math.floor((Math.random() * 25) + 3);
         let _this = this;
-        idPerso.setAttribute('class',this.skills[idAttack].anim);
+        this.id.setAttribute('class',this.skills[idAttack].anim);
         containerPerso.style.justifyContent = "center";
         let hitAudio = new Audio(this.skills[idAttack].audio);
         hitAudio.play();
         this.cp = 0;
-        idPerso.addEventListener('animationend', function() {
-        idPerso.setAttribute('class',`${_this.idleAnim}`);
+        this.id.addEventListener('animationend', function() {
+        _this.id.setAttribute('class',`${_this.idleAnim}`);
         containerPerso.style.justifyContent = "space-around";
         });
         this.summonCount--;
@@ -106,16 +107,16 @@ class Persorev {
     };
     
 
-    skill(target,idAttack,idPerso) {
+    skill(target,idAttack) {
         this.limitBreak = this.limitBreak + Math.floor((Math.random() * 25) + 3);
         let _this = this;
         if (this.cp < this.skills[idAttack].cp) {
-            idPerso.setAttribute('class',this.skills[0].anim);
+            this.id.setAttribute('class',this.skills[0].anim);
             containerPerso.style.justifyContent = "center";
             let hitAudio = new Audio(this.skills[0].audio);
             hitAudio.play();
-            idPerso.addEventListener('animationend', function() {
-            idPerso.setAttribute('class', `${_this.idleAnim}`);
+            this.id.addEventListener('animationend', function() {
+            _this.id.setAttribute('class', `${_this.idleAnim}`);
             containerPerso.style.justifyContent = "space-around";
             })
             console.log('no cp left,attaque normale');
@@ -128,12 +129,12 @@ class Persorev {
             
             
         } else {
-            idPerso.setAttribute('class',this.skills[idAttack].anim);
+            this.id.setAttribute('class',this.skills[idAttack].anim);
             containerPerso.style.justifyContent = "center";
             let hitAudio = new Audio(this.skills[idAttack].audio);
             hitAudio.play();
-            idPerso.addEventListener('animationend', function() {
-            idPerso.setAttribute('class', _this.idleAnim);
+            this.id.addEventListener('animationend', function() {
+            _this.id.setAttribute('class', _this.idleAnim);
             containerPerso.style.justifyContent = "space-around";
             })
             console.log(`${this.skills[idAttack].name} de ${this.name}.`)
@@ -141,7 +142,7 @@ class Persorev {
             let att = this.str*this.skills[idAttack].str+ Math.floor((Math.random() * 4) + 0);
             target.pv = target.pv - att;
             console.log(`il reste ${this.cp} cp à ${this.name}.`)
-            console.log(`${target.name} perd ${att}, il lui reste ${target.pv}`);
+            console.log(`${target.name} perd ${att} pv, il lui reste ${target.pv} pv`);
             return target.hp;
         }
 
@@ -149,16 +150,16 @@ class Persorev {
         
     }
 
-    magick(target,idAttack,idPerso) {
+    magick(target,idAttack) {
         let _this = this;
         if (this.cp < this.skills[idAttack].cp) {
             this.limitBreak = this.limitBreak + Math.floor((Math.random() * 3) + 1);
-            idPerso.setAttribute('class',this.skills[idAttack].anim);
+            this.id.setAttribute('class',this.skills[idAttack].anim);
             containerPerso.style.justifyContent = "center";
             let hitAudio = new Audio(this.skills[idAttack].audio);
             hitAudio.play();
-            idPerso.addEventListener('animationend', function() {
-            idPerso.setAttribute('class', `${_this.idleAnim}`);
+            this.id.addEventListener('animationend', function() {
+            _this.id.setAttribute('class', `${_this.idleAnim}`);
             containerPerso.style.justifyContent = "space-around";
             })
             console.log('no cp left,attaque normale');
@@ -172,11 +173,11 @@ class Persorev {
             
         } else {
             this.limitBreak = this.limitBreak + Math.floor((Math.random() * 75) + 15);
-            idPerso.setAttribute('class',this.skills[idAttack].anim);
+            this.id.setAttribute('class',this.skills[idAttack].anim);
             let hitAudio = new Audio(this.skills[idAttack].audio);
             hitAudio.play();
-            idPerso.addEventListener('animationend', function() {
-                idPerso.setAttribute('class',_this.idleAnim);
+            this.id.addEventListener('animationend', function() {
+                _this.id.setAttribute('class',_this.idleAnim);
                 containerPerso.style.justifyContent = "space-around";
             })
             console.log(`${this.skills[idAttack].name} de ${this.name}.`)
@@ -185,26 +186,26 @@ class Persorev {
             target.pv = target.pv - att;
             console.log(`il reste ${this.cp} cp à ${this.name}.`);
             console.log(`La magie augmente de beaucoup la jauge de limit break :${this.limitBreak} /255`);
-            console.log(`${target.name} perd ${att}, il lui reste ${target.pv}`);
+            console.log(`${target.name} perd ${att} pv, il lui reste ${target.pv} pv`);
         }
 
         
         
     }
 
-    limitBreakSkill(target,idAttack,idPerso) {
+    limitBreakSkill(target,idAttack) {
         let _this = this;
-        idPerso.setAttribute('class',this.skills[idAttack].anim);
+        this.id.setAttribute('class',this.skills[idAttack].anim);
         containerPerso.style.justifyContent = "center";
         let hitAudio = new Audio(this.skills[idAttack].audio);
         hitAudio.play();
-        idPerso.addEventListener('animationend', function() {
-        idPerso.setAttribute('class', _this.idleAnim);
+        this.id.addEventListener('animationend', function() {
+        _this.id.setAttribute('class', _this.idleAnim);
         containerPerso.style.justifyContent = "space-around";
         })
         console.log(`${this.skills[idAttack].name} de ${this.name}.`)
         this.cp = this.cp - this.skills[idAttack].cp;
-        let att = this.str*this.skills[idAttack].str+ Math.floor((Math.random() * 50) + 0);
+        let att = this.str*this.skills[idAttack].str+ Math.floor((Math.random() * 75) + 10);
         target.pv = target.pv - att;
         console.log(`il reste ${this.cp} cp à ${this.name}.`)
         console.log(`${target.name} perd ${att}, il lui reste ${target.pv}`);
@@ -213,7 +214,7 @@ class Persorev {
     
     }
 
-    actionBlock(target,idAttack,idPerso) {
+    actionBlock(target,idAttack) {
         this.limitBreak = this.limitBreak + Math.floor((Math.random() * 25) + 3);
         if (this.hp > this.maxPv)  {
             this.hp = this.maxPv;
@@ -223,18 +224,18 @@ class Persorev {
         let hitAudio = new Audio(this.skills[idAttack].audio);
         hitAudio.volume = 0.2;
         hitAudio.play();
-        idPerso.setAttribute('class',`${this.skills[idAttack].anim}`);
-        idPerso.addEventListener('animationend', function() {
-        idPerso.setAttribute('class', `${_this.idleAnim}`);
+        this.id.setAttribute('class',`${this.skills[idAttack].anim}`);
+        this.id.addEventListener('animationend', function() {
+        _this.id.setAttribute('class', `${_this.idleAnim}`);
         })
         this.pv = this.pv + this.def*2 + Math.floor((Math.random() * 40) + 0) - target.str;
         this.cp = this.cp + Math.floor((Math.random() * 3) + 1)
-        console.log(`${this.name} bloque ,il lui reste ${this.pv}, l'attaque fait ${target.str} dégats de pv.`);
+        console.log(`${this.name} bloque ,il lui reste ${this.pv} pv, l'attaque fait ${target.str} dégats de pv.`);
         
         
     };
 
-    useItem(item,idAttack,idPerso) {
+    useItem(item,idAttack) {
         this.limitBreak = this.limitBreak + Math.floor((Math.random() * 25) + 3);
         if (this.item == 0) {
             item1.style.display ='none';
@@ -249,23 +250,23 @@ class Persorev {
             
         } else {
             let _this = this;
-            idPerso.setAttribute('class',`${this.skills[idAttack].anim}`);
-            idPerso.addEventListener('animationend', function() {
-            idPerso.setAttribute('class', `${_this.idleAnim}`);
+            this.id.setAttribute('class',`${this.skills[idAttack].anim}`);
+            this.id.addEventListener('animationend', function() {
+            _this.id.setAttribute('class', `${_this.idleAnim}`);
             })
             
             this.pv = this.pv + item.hp
             this.item--
-            console.log(`used ${item.name} recovered ${item.hp} pv. ${this.pv} left.` );
-        }
+            console.log(`${this.name} used ${item.name} recovered ${item.hp} pv. ${this.pv} left.` );
+        } 
     };
 
 
 
-    endGame(idPerso) {
+    endGame() {
         if (this.pv <= 0) {
-            idPerso.setAttribute('class', this.deadAnim);
-            idPerso.addEventListener('animationend', function() {
+            this.id.setAttribute('class', this.deadAnim);
+            this.id.addEventListener('animationend', function() {
                 body.setAttribute('id','gameover');
                 body.addEventListener('onclick',function () {
                     windows.location.reload();
