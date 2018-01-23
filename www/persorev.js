@@ -24,7 +24,7 @@ class Persorev {
             this.useItem(hiPotion,5);
     
         } else if (this.cp < 5 && this.item >=1) {
-            this.useCpItem(manaPot);
+            this.useCpItem(manaPot,9);
 
         } else { 
         switch (rand) {
@@ -172,7 +172,7 @@ class Persorev {
             
             
         } else {
-            this.limitBreak = this.limitBreak + Math.floor((Math.random() * 75) + 15);
+            this.limitBreak = this.limitBreak + Math.floor((Math.random() * 75) + 30);
             this.id.setAttribute('class',this.skills[idAttack].anim);
             let hitAudio = new Audio(this.skills[idAttack].audio);
             hitAudio.play();
@@ -279,7 +279,7 @@ class Persorev {
         }
     }
     
-    useCpItem(item) {
+    useCpItem(item,idAttack) {
         if (this.item <= 0) {
             item1.style.display ='none';
             item2.style.display ='none';
@@ -292,10 +292,26 @@ class Persorev {
             this.cp = this.maxcp;
             
         } else {
+            let _this = this;
+            this.id.setAttribute('class',`${this.skills[idAttack].anim}`);
+            this.id.addEventListener('animationend', function() {
+            _this.id.setAttribute('class', `${_this.idleAnim}`);
+            })
             
             this.cp = this.cp + item.cp
             this.item--
             console.log(`used ${this.name} recovered ${item.cp} cp. ${this.cp} cp left.` );
         }
     };
-}
+
+    overloadStats () {
+        if (this.pv > this.maxPv) {
+            this.pv = this.maxPv
+            
+        }
+        if (this.cp > this.maxCP) {
+            this.cp = this.maxCP
+            
+        }
+    };
+};

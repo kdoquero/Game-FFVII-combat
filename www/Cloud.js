@@ -9,6 +9,7 @@ class Perso1 extends Persorev {
         let bahamut = new Skill ("Bahamut",0,12,"perso1invo1","assets/audio/hit.wav");
         let blockAct = new Skill ("Block",0,0,"perso1block","assets/audio/shield block.mp3");
         let itemAct = new Skill ('Potion',0,0,"perso1item");
-        super("Cloud", 250, 50, 7, 4, 4, 250,"perso1",[normalAttack,contreTaillade,climHazard,omniSlash,firebolt,bahamut,blockAct,itemAct],50,1,0,"perso1dead",document.querySelector('.perso1'));
+        let itemAct2 = new Skill ('Potion',0,0,"perso1item2");
+        super("Cloud", 250, 50, 7, 4, 4, 250,"perso1",[normalAttack,contreTaillade,climHazard,omniSlash,firebolt,bahamut,blockAct,itemAct,itemAct2],50,1,0,"perso1dead",document.querySelector('.perso1'));
     }
 }

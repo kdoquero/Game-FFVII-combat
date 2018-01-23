@@ -128,7 +128,7 @@ item1.addEventListener('click' , function(event){
 
 item2.addEventListener('click' , function(event){
     sephiroth.iaAttack(cloud);
-    cloud.useCpItem(manaPot,7);
+    cloud.useCpItem(manaPot,8);
     display();
     
 });
@@ -154,9 +154,12 @@ function display() {
     skill1.setAttribute('value', `${cloud.skills[1].name} : ${cloud.skills[1].cp} cp`);
     skill2.setAttribute('value', `${cloud.skills[2].name} : ${cloud.skills[2].cp} cp`);
     skill3.setAttribute('value', `${cloud.skills[4].name} : ${cloud.skills[4].cp} cp`);
-    item1.setAttribute('value', `${hiPotion.name} : restaure ${hiPotion.hp} pv`);
+    item1.setAttribute('value', `${hiPotion.name} :${hiPotion.hp} pv`);
+    item2.setAttribute('value', `${manaPot.name} :${manaPot.cp} cp`);
     skillblock.style.display ='none';
     itemblock.style.display ='none';
+    cloud.overloadStats();
+    sephiroth.overloadStats();
     cloud.showLimitBreak();
     cloud.endGame();
     sephiroth.endGame();
