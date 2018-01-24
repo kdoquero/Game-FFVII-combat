@@ -1,0 +1,9 @@
+#intro {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("assets/images/final_fantasy_vii_remake_start_screen_by_rtql8d-d90oimk.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 300;
+    display: flex;
+}

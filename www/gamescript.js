@@ -38,12 +38,17 @@ let limitBreakButton = document.querySelector('#limitbreak');
 let themesong = new Audio("assets/final-fantasy-vii-last-stand2.mp3");
 let body = document.querySelector('body');
 let logs = document.querySelector('#log');
+let backgroundbtn = document.querySelector('#backgbtn');
+//let background = docum
 themesong.play();
 themesong.loop = true;
 themesong.volume = 0.15;
 display();
 
-
+// backgroundbtn.addEventListener('click', function () {
+//     let backgroundtab = [document.body.style.backgroundImage = "url('img_tree.png')",]
+    
+// })
 
 attack.addEventListener('click' , function(event){
     cloud.attack(sephiroth,0);
@@ -101,6 +106,15 @@ skill3.addEventListener('click' , function(event){
     
 });
 
+skill4.addEventListener('click' , function(event){
+    cloud.buff(9);
+    sephiroth.iaAttack(cloud);
+    display();
+
+   
+    
+});
+
 block.addEventListener('click' , function(event){
     sephiroth.iaAttack(cloud);
     cloud.actionBlock(sephiroth,6);
@@ -142,6 +156,7 @@ function display() {
     let cloudCp = document.querySelector('#barcp2');
     let cloudCptext = document.querySelector('#barcp2text');
     let sephirothCptext = document.querySelector('#barcp1text');
+    let backgroundbtn = document.querySelector('#backgbtn');
 
     sephirothHptext.textContent = `PV : ${sephiroth.pv} /250`;
     cloudHptext.textContent = `PV : ${cloud.pv} /250`;

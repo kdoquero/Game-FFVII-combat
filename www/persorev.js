@@ -150,6 +150,27 @@ class Persorev {
         
     }
 
+    buff(idAttack) {
+        this.limitBreak = this.limitBreak + Math.floor((Math.random() * 25) + 3);
+        let pvLost = Math.floor((Math.random() * 150) + 35)
+        this.pv = this.pv - pvLost;
+        let strBoost = Math.round(Math.random() * 5);
+        this.str = this.str+ strBoost;
+        this.cp = this.cp - this.skills[idAttack].cp;
+        console.log(`${this.name} aumgente sa force de ${strBoost},mais perd ${pvLost}`);
+        this.id.setAttribute('class',this.skills[idAttack].anim);
+        let hitAudio = new Audio(this.skills[idAttack].audio);
+        hitAudio.play();
+        this.id.addEventListener('animationend', function() {
+        _this.id.setAttribute('class', `${_this.idleAnim}`);
+        containerPerso.style.justifyContent = "space-around";
+        })
+        
+
+        
+        
+    }
+
     magick(target,idAttack) {
         let _this = this;
         if (this.cp < this.skills[idAttack].cp) {
@@ -268,7 +289,7 @@ class Persorev {
             this.id.setAttribute('class', this.deadAnim);
             this.id.addEventListener('animationend', function() {
                 body.setAttribute('id','gameover');
-                body.addEventListener('onclick',function () {
+                body.addEventListener('click',function () {
                     windows.location.reload();
                     
                 })
