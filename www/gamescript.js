@@ -36,19 +36,32 @@ let containerPerso = document.querySelector('.container-perso');
 //let perso2 = document.querySelector('.perso2');
 let limitBreakButton = document.querySelector('#limitbreak');
 let themesong = new Audio("assets/final-fantasy-vii-last-stand2.mp3");
-let body = document.querySelector('body');
+let startMenu = document.querySelector('.start-menu');
 let logs = document.querySelector('#log');
 let backgroundbtn = document.querySelector('#backgbtn');
-//let background = docum
+let body = document.querySelector('body');
+let background = document.querySelector('.container-game');
 themesong.play();
 themesong.loop = true;
 themesong.volume = 0.15;
 display();
 
-// backgroundbtn.addEventListener('click', function () {
-//     let backgroundtab = [document.body.style.backgroundImage = "url('img_tree.png')",]
+// startMenu.addEventListener('click', function () {
+//     startMenu.style.backgroundImage = ;
+    
     
 // })
+
+backgroundbtn.addEventListener('click', function () {
+    // for (let index = 0; index < 2; index++) {
+    //     background.style.backgroundImage = `url("assets/images/image${index}.gif")`;
+        
+        
+    // }
+    background.style.backgroundImage = 'url("assets/images/image1.gif")';
+    
+});
+
 
 attack.addEventListener('click' , function(event){
     cloud.attack(sephiroth,0);
@@ -158,7 +171,7 @@ function display() {
     let sephirothCptext = document.querySelector('#barcp1text');
     let backgroundbtn = document.querySelector('#backgbtn');
 
-    sephirothHptext.textContent = `PV : ${sephiroth.pv} /250`;
+    sephirothHptext.textContent = `PV : ${sephiroth.pv} /300`;
     cloudHptext.textContent = `PV : ${cloud.pv} /250`;
     sephirothHp.style.width = sephiroth.pv/2.5  + "%";
     cloudHp.style.width = cloud.pv/2.5   + "%";
@@ -169,6 +182,7 @@ function display() {
     skill1.setAttribute('value', `${cloud.skills[1].name} : ${cloud.skills[1].cp} cp`);
     skill2.setAttribute('value', `${cloud.skills[2].name} : ${cloud.skills[2].cp} cp`);
     skill3.setAttribute('value', `${cloud.skills[4].name} : ${cloud.skills[4].cp} cp`);
+    skill4.setAttribute('value', `${cloud.skills[9].name} : ${cloud.skills[9].cp} cp`);
     item1.setAttribute('value', `${hiPotion.name} :${hiPotion.hp} pv`);
     item2.setAttribute('value', `${manaPot.name} :${manaPot.cp} cp`);
     skillblock.style.display ='none';

@@ -1,11 +1,27 @@
 div {
     
 }
-body {
+
+.start-menu {
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('assets/images/startmenu.jpg');
+    justify-content: center;
+    z-index: 200;
+    border-radius: 30px;
+}
+
+.background {
+    height: 100wh;
+    width: 100vw;
     background-size: cover;
     background-repeat: no-repeat;
     background-image: url('assets/images/wallhaven-95529.jpg');
     z-index: -100;
+    justify-content: center;
+    border-radius: 30px;
 }
 
 ul {
@@ -13,6 +29,7 @@ ul {
 }
 
 section {
+    width: 100%;
     margin-top: 25vh;
     justify-content: center;
     align-items: center;
@@ -148,6 +165,26 @@ form {
     to {
         background-position-y: 0;
         background-position-x: -300px;
+    }
+}
+
+.perso1buff {
+    height: 106px;
+    width: 94px;
+    background-image: url("assets/sprites/unit_idle_207000105aura.png");
+    animation : buff1 0.5s infinite steps(3) ;
+
+
+}
+
+@keyframes buff1 {
+    from {
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+    to {
+        background-position-y: 0;
+        background-position-x: -258px;
     }
 }
 
@@ -438,6 +475,26 @@ form {
     }
 }
 
+.perso2buff {
+    display: block;
+    height: 106px;
+    width: 150px;
+    background-image: url("assets/sprites/unit_idle_207001005aura.png");
+    animation : buff2 0.5s steps(3) infinite;
+
+}
+
+@keyframes buff2 {
+    from {
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+    to {
+        background-position-y: 0;
+        background-position-x: -372px;
+    }
+}
+
 .cloudfire {
     display: block;
     height: 86px;
@@ -554,6 +611,15 @@ form {
     height: 186px;
     width: 532px;
     background-image: url("assets/sprites/unit_limit_atk_207001005mirror.png");
+    overflow: hidden;
+    animation : skill2-4-x 0.3s 15 steps(3),
+    skill2-4-y 2.5s 1 steps(15);
+}
+
+.perso2limit1 {
+    height: 186px;
+    width: 532px;
+    background-image: url("assets/sprites/unit_limit_atk_207001005mirroraura.png");
     overflow: hidden;
     animation : skill2-4-x 0.3s 15 steps(3),
     skill2-4-y 2.5s 1 steps(15);

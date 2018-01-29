@@ -24,7 +24,10 @@ class Persorev {
             this.useItem(hiPotion,5);
     
         } else if (this.cp < 5 && this.item >=1) {
-            this.useCpItem(manaPot,9);
+            this.useCpItem(manaPot,8);
+
+        } else if (this.limitBreak >= 255 && rand <= 2){
+            this.limitBreakSkill(target,10);
 
         } else { 
         switch (rand) {
@@ -39,8 +42,10 @@ class Persorev {
             case 4 : this.actionBlock(target,4);
                 break;
             case 5 : this.summon(target,7);
+                break;
+            // case 6 : this.buff(9);
+            //     break;
 
-                
             default:
                 break;
         }    
@@ -60,9 +65,10 @@ class Persorev {
 
     attack(target,idAttack){
         let _this = this;
-        this.limitBreak = this.limitBreak + Math.floor((Math.random() * 25) + 3);
+        
         let att = this.str + Math.floor((Math.random() * 9) + 0);
         target.pv = target.pv - att;
+        target.limitBreak = target.limitBreak + att + Math.floor((Math.random() * 9) + 0);
         console.log(`${target.name} perd ${att} pv, il lui reste ${target.pv} pv !!!`);
         this.id.setAttribute('class',this.skills[idAttack].anim);
         containerPerso.style.justifyContent = "center";
@@ -83,15 +89,16 @@ class Persorev {
             console.log(` Demi-Invocation de ${this.skills[idAttack].name}.`)
             let att = this.skills[idAttack].str+ Math.floor((Math.random() * 75) + 25);
             target.pv = target.pv - att;
+            target.limitBreak = target.limitBreak + att/2 + Math.floor((Math.random() * 9) + 0);
             console.log(`pas assez de cp pour une full attaque,degats max divisé par 2 !${target.name} perd ${att} pv, il lui reste ${target.pv} pv !!!`);
         } 
         if (this.cp >= this.maxCP/2 && this.summonCount >= 1) {
             console.log(`Invocation de ${this.skills[idAttack].name}.`)
             let att = this.skills[idAttack].str+ Math.floor((Math.random() * 200) + 50);
             target.pv = target.pv - att;
+            target.limitBreak = target.limitBreak + att/2 + Math.floor((Math.random() * 9) + 0);
             console.log(`${target.name} perd ${att} pv, il lui reste ${target.pv} pv !!!`);
         }
-        this.limitBreak = this.limitBreak + Math.floor((Math.random() * 25) + 3);
         let _this = this;
         this.id.setAttribute('class',this.skills[idAttack].anim);
         containerPerso.style.justifyContent = "center";
@@ -108,7 +115,7 @@ class Persorev {
     
 
     skill(target,idAttack) {
-        this.limitBreak = this.limitBreak + Math.floor((Math.random() * 25) + 3);
+        
         let _this = this;
         if (this.cp < this.skills[idAttack].cp) {
             this.id.setAttribute('class',this.skills[0].anim);
@@ -122,6 +129,7 @@ class Persorev {
             console.log('no cp left,attaque normale');
             let att = this.str;
             target.pv = target.pv - att;
+            target.limitBreak = target.limitBreak + att/2 + Math.floor((Math.random() * 9) + 0);
             console.log(`il reste ${this.cp} cp à ${this.name}.`)
             console.log(`${target.name} perd ${att} pv, il lui reste ${target.pv}pv`);
             console.log(`il reste à ${this.name},  ${this.pv}pv`);
@@ -143,24 +151,27 @@ class Persorev {
             target.pv = target.pv - att;
             console.log(`il reste ${this.cp} cp à ${this.name}.`)
             console.log(`${target.name} perd ${att} pv, il lui reste ${target.pv} pv`);
-            return target.hp;
+            target.limitBreak = target.limitBreak + att/2 + Math.floor((Math.random() * 9) + 0);
         }
-
+        
         
         
     }
 
     buff(idAttack) {
-        this.limitBreak = this.limitBreak + Math.floor((Math.random() * 25) + 3);
-        let pvLost = Math.floor((Math.random() * 150) + 35)
+        let _this = this;
+        this.limitBreak = this.limitBreak + Math.floor((Math.random() * 55) + 15);
+        let pvLost = Math.floor((Math.random() * 75) + 35);
         this.pv = this.pv - pvLost;
-        let strBoost = Math.round(Math.random() * 5);
-        this.str = this.str+ strBoost;
+        let strBoost = Math.floor((Math.random() * 5) + 3);
+        this.str = this.str + strBoost;
         this.cp = this.cp - this.skills[idAttack].cp;
-        console.log(`${this.name} aumgente sa force de ${strBoost},mais perd ${pvLost}`);
+        console.log(`${this.name} aumgente sa force de ${strBoost},mais perd ${pvLost} pv`);
+        console.log(`${this.skills[idAttack].name} consome ${this.skills[idAttack].cp} cp`);
         this.id.setAttribute('class',this.skills[idAttack].anim);
         let hitAudio = new Audio(this.skills[idAttack].audio);
         hitAudio.play();
+        //_this.idleAnim = this.skills[idAttack].anim;
         this.id.addEventListener('animationend', function() {
         _this.id.setAttribute('class', `${_this.idleAnim}`);
         containerPerso.style.justifyContent = "space-around";
@@ -228,6 +239,7 @@ class Persorev {
         this.cp = this.cp - this.skills[idAttack].cp;
         let att = this.str*this.skills[idAttack].str+ Math.floor((Math.random() * 75) + 10);
         target.pv = target.pv - att;
+        target.limitBreak = target.limitBreak + att/2 + Math.floor((Math.random() * 9) + 0);
         console.log(`il reste ${this.cp} cp à ${this.name}.`)
         console.log(`${target.name} perd ${att}, il lui reste ${target.pv}`);
         this.limitBreak = 0;
@@ -249,8 +261,8 @@ class Persorev {
         this.id.addEventListener('animationend', function() {
         _this.id.setAttribute('class', `${_this.idleAnim}`);
         })
-        this.pv = this.pv + this.def*2 + Math.floor((Math.random() * 40) + 0) - target.str;
-        this.cp = this.cp + Math.floor((Math.random() * 3) + 1)
+        this.pv = this.pv + this.def*2 + Math.floor((Math.random() * 70) + 10) - target.str;
+        this.cp = this.cp + Math.floor((Math.random() * 10) + 3);
         console.log(`${this.name} bloque ,il lui reste ${this.pv} pv, l'attaque fait ${target.str} dégats de pv.`);
         
         
@@ -289,10 +301,7 @@ class Persorev {
             this.id.setAttribute('class', this.deadAnim);
             this.id.addEventListener('animationend', function() {
                 body.setAttribute('id','gameover');
-                body.addEventListener('click',function () {
-                    windows.location.reload();
-                    
-                })
+                setTimeout("location.reload(true);",6000);
             })
             
     
@@ -301,6 +310,7 @@ class Persorev {
     }
     
     useCpItem(item,idAttack) {
+        this.limitBreak = this.limitBreak + Math.floor((Math.random() * 25) + 10);
         if (this.item <= 0) {
             item1.style.display ='none';
             item2.style.display ='none';
