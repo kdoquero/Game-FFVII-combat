@@ -1,5 +1,5 @@
 "use strict"
-class Persorev {
+class PersoModel {
     constructor(name, pv, cp, str, def, item, maxPv, idleAnim ,skills = [],maxCp,summonCount,limitBreak,deadAnim,id) {
         this.name = name;
         this.pv = pv;
@@ -284,9 +284,12 @@ class Persorev {
         } else {
             let _this = this;
             this.id.setAttribute('class',`${this.skills[idAttack].anim}`);
+            let hitAudio = new Audio(this.skills[idAttack].audio);
+            hitAudio.play();
             this.id.addEventListener('animationend', function() {
             _this.id.setAttribute('class', `${_this.idleAnim}`);
             })
+            
             
             this.pv = this.pv + item.hp
             this.item--
@@ -325,6 +328,8 @@ class Persorev {
         } else {
             let _this = this;
             this.id.setAttribute('class',`${this.skills[idAttack].anim}`);
+            let hitAudio = new Audio(this.skills[idAttack].audio);
+            hitAudio.play();
             this.id.addEventListener('animationend', function() {
             _this.id.setAttribute('class', `${_this.idleAnim}`);
             })

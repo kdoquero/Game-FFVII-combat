@@ -52,14 +52,13 @@ display();
     
 // })
 
-backgroundbtn.addEventListener('click', function () {
-    // for (let index = 0; index < 2; index++) {
-    //     background.style.backgroundImage = `url("assets/images/image${index}.gif")`;
+backgroundbtn.addEventListener('click', function (event) {
+    let tab = ["url('assets/images/image0.gif')","url('assets/images/image1.gif')","url('assets/images/LafBWtl.gif')"];
+
+    background.style.backgroundImage = tab[1];
         
         
-    // }
-    background.style.backgroundImage = 'url("assets/images/image1.gif")';
-    
+
 });
 
 

@@ -3,11 +3,9 @@
 
 class GameController {
     constructor() {
-        let cloud = new Perso1;
-        let sephiroth = new Perso2;
         this.view = new View;
-
-        let _this =this;
+        this.cloud = new Perso1;
+        this.sephiroth = new Perso2;
         let form = document.querySelector('form');
         let attack = document.querySelector('#attack');
         let invocation = document.querySelector('#invocation');
@@ -28,44 +26,57 @@ class GameController {
         let SephirothHpcontainer = document.querySelector('.barcontainer');
         let gameOver = document.querySelector('#gameover');
         let containerPerso = document.querySelector('.container-perso');
+        //let perso2 = document.querySelector('.perso2');
         let limitBreakButton = document.querySelector('#limitbreak');
         let themesong = new Audio("assets/final-fantasy-vii-last-stand2.mp3");
-        let body = document.querySelector('body');
+        let startMenu = document.querySelector('.start-menu');
         let logs = document.querySelector('#log');
         let backgroundbtn = document.querySelector('#backgbtn');
-        //let background = docum
+        let body = document.querySelector('body');
+        let background = document.querySelector('.container-game');
         themesong.play();
         themesong.loop = true;
         themesong.volume = 0.15;
+        display();
 
-        
-
-        // backgroundbtn.addEventListener('click', function () {
-        //     let backgroundtab = [document.body.style.backgroundImage = "url('img_tree.png')",]
+        // startMenu.addEventListener('click', function () {
+        //     startMenu.style.backgroundImage = ;
+            
             
         // })
-        
+
+        backgroundbtn.addEventListener('click', function () {
+            // for (let index = 0; index < 2; index++) {
+            //     background.style.backgroundImage = `url("assets/images/image${index}.gif")`;
+                
+                
+            // }
+            background.style.backgroundImage = 'url("assets/images/image1.gif")';
+            
+        });
+
+
         attack.addEventListener('click' , function(event){
-            cloud.attack(sephiroth,0);
-            sephiroth.iaAttack(cloud);
-            _this.view.display();
+            this.cloud.attack(sephiroth,0);
+            this.sephiroth.iaAttack(cloud);
+            display();
             
         });
-        
+
         limitBreakButton.addEventListener('click' , function(event){
-            cloud.limitBreakSkill(sephiroth,3);
-            sephiroth.iaAttack(cloud);
-            _this.view.display();
+            this.cloud.limitBreakSkill(sephiroth,3);
+            this.sephiroth.iaAttack(cloud);
+            display();
             
         });
-        
+
         invocation.addEventListener('click' , function(event){
-            cloud.summon(sephiroth,5);
-            sephiroth.iaAttack(cloud);
-            _this.view.display();
+            this.cloud.summon(sephiroth,5);
+            this.sephiroth.iaAttack(cloud);
+            display();
             
         });
-        
+
         skill.addEventListener('click' , function(event){
             if (skillblock.style.display =='flex') {
                 skillblock.style.display ='none';
@@ -75,38 +86,47 @@ class GameController {
             }
             
         });
-        
+
         skill1.addEventListener('click' , function(event){
-            cloud.skill(sephiroth,1);
-            sephiroth.iaAttack(cloud);
-        
-            _this.view.display();
+            this.cloud.skill(sephiroth,1);
+            this.sephiroth.iaAttack(cloud);
+
+            display();
             
         });
-        
+
         skill2.addEventListener('click' , function(event){
-            cloud.skill(sephiroth,2);
-            sephiroth.iaAttack(cloud);
-           
-            _this.view.display();
-           
+            this.cloud.skill(sephiroth,2);
+            this.sephiroth.iaAttack(cloud);
+        
+            display();
+        
             
         });
         skill3.addEventListener('click' , function(event){
-            cloud.magick(sephiroth,4);
-            sephiroth.iaAttack(cloud);
-            _this.view.display();
+            this.cloud.magick(sephiroth,4);
+            this.sephiroth.iaAttack(cloud);
+            display();
+
         
-           
             
         });
+
+        skill4.addEventListener('click' , function(event){
+            this.cloud.buff(9);
+            this.sephiroth.iaAttack(cloud);
+            display();
+
         
+            
+        });
+
         block.addEventListener('click' , function(event){
-            sephiroth.iaAttack(cloud);
-            cloud.actionBlock(sephiroth,6);
-            _this.view.display();
+            this.sephiroth.iaAttack(cloud);
+            this.cloud.actionBlock(sephiroth,6);
+            display();
+
         
-           
             
         });
         item.addEventListener('click' , function(event){
@@ -117,19 +137,19 @@ class GameController {
                 itemblock.style.display ='flex';
             }
         });
-        
-        
+
+
         item1.addEventListener('click' , function(event){
-            sephiroth.iaAttack(cloud);
-            cloud.useItem(hiPotion,7);
-            _this.view.display();
+            this.sephiroth.iaAttack(cloud);
+            this.cloud.useItem(hiPotion,7);
+            display();
             
         });
-        
+
         item2.addEventListener('click' , function(event){
-            sephiroth.iaAttack(cloud);
-            cloud.useCpItem(manaPot,8);
-            _this.view.display();
+            this.sephiroth.iaAttack(cloud);
+            this.cloud.useCpItem(manaPot,8);
+            display();
             
         });
     }

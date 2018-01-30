@@ -1,5 +1,5 @@
 "use strict"
-class Perso1 extends Persorev {
+class Perso1 extends PersoModel {
     constructor(){
         let normalAttack = new Skill("Attack", 1, 1,"perso1atk1","assets/audio/hit.wav");
         let contreTaillade = new Skill("Contre-taillade", 5, 3,"perso1atk2","assets/audio/hit.wav");
@@ -8,8 +8,8 @@ class Perso1 extends Persorev {
         let firebolt = new Skill ("magick:Firebolt",20,6,"perso1mag1","assets/audio/Fire 3.mp3");
         let bahamut = new Skill ("Bahamut",0,12,"perso1invo1","assets/audio/hit.wav");
         let blockAct = new Skill ("Block",0,0,"perso1block","assets/audio/shield block.mp3");
-        let itemAct = new Skill ('Potion',0,0,"perso1item");
-        let itemAct2 = new Skill ('Potion',0,0,"perso1item2");
+        let itemAct = new Skill ('Potion',0,0,"perso1item","assets/audio/bring.wav");
+        let itemAct2 = new Skill ('Potion',0,0,"perso1item2","assets/audio/bring.wav");
         let buff = new Skill ('Concentration',15,0,"perso1buff","assets/audio/limit.wav");
         super("Cloud", 250, 50, 7, 4, 4, 250,"perso1",[normalAttack,contreTaillade,climHazard,omniSlash,firebolt,bahamut,blockAct,itemAct,itemAct2,buff],50,1,0,"perso1dead",document.querySelector('.perso1'));
     }
