@@ -134,6 +134,7 @@ form {
     background-image: url("assets/sprites/LafBWtl.gif");
     background-repeat: round;
     align-items: center;
+    background-size: cover;
 }
 .container-perso {
     justify-content: space-around;
