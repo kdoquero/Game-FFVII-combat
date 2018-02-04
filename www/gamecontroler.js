@@ -37,7 +37,7 @@ class GameController {
         themesong.play();
         themesong.loop = true;
         themesong.volume = 0.15;
-        display();
+        this.view.display();
 
         // startMenu.addEventListener('click', function () {
         //     startMenu.style.backgroundImage = ;
@@ -59,21 +59,21 @@ class GameController {
         attack.addEventListener('click' , function(event){
             this.cloud.attack(sephiroth,0);
             this.sephiroth.iaAttack(cloud);
-            display();
+            this.view.display();
             
         });
 
         limitBreakButton.addEventListener('click' , function(event){
             this.cloud.limitBreakSkill(sephiroth,3);
             this.sephiroth.iaAttack(cloud);
-            display();
+            this.view.display();
             
         });
 
         invocation.addEventListener('click' , function(event){
             this.cloud.summon(sephiroth,5);
             this.sephiroth.iaAttack(cloud);
-            display();
+            this.view.display();
             
         });
 
@@ -91,7 +91,7 @@ class GameController {
             this.cloud.skill(sephiroth,1);
             this.sephiroth.iaAttack(cloud);
 
-            display();
+            this.view.display();
             
         });
 
@@ -99,14 +99,14 @@ class GameController {
             this.cloud.skill(sephiroth,2);
             this.sephiroth.iaAttack(cloud);
         
-            display();
+            this.view.display();
         
             
         });
         skill3.addEventListener('click' , function(event){
             this.cloud.magick(sephiroth,4);
             this.sephiroth.iaAttack(cloud);
-            display();
+            this.view.display();
 
         
             
@@ -115,7 +115,7 @@ class GameController {
         skill4.addEventListener('click' , function(event){
             this.cloud.buff(9);
             this.sephiroth.iaAttack(cloud);
-            display();
+            this.view.display();
 
         
             
@@ -124,7 +124,7 @@ class GameController {
         block.addEventListener('click' , function(event){
             this.sephiroth.iaAttack(cloud);
             this.cloud.actionBlock(sephiroth,6);
-            display();
+            this.view.display();
 
         
             
@@ -142,14 +142,14 @@ class GameController {
         item1.addEventListener('click' , function(event){
             this.sephiroth.iaAttack(cloud);
             this.cloud.useItem(hiPotion,7);
-            display();
+            this.view.display();
             
         });
 
         item2.addEventListener('click' , function(event){
             this.sephiroth.iaAttack(cloud);
             this.cloud.useCpItem(manaPot,8);
-            display();
+            this.view.display();
             
         });
     }

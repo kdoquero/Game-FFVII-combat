@@ -1,3 +1,5 @@
+
+let controller = new GameController();
 let hiPotion = {
     name : 'hi-potion',
     hp : 125

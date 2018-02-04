@@ -1,5 +1,13 @@
-div {
-    
+#intro {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("assets/images/startmenu.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 600;
+    display: flex;
+    top: 0;
+    left: 0;
 }
 
 .start-menu {
@@ -416,14 +424,14 @@ form {
 }
 
 .perso1dead {
-    height: 63px;
-    width: 86px;
-    background-image: url('assets/sprites/unit_idle_207000105_dead.png');
-    animation: dead1-x 4s 1 steps(3);
+    height: 38px;
+    width: 120px;
+    background-image: url('assets/sprites/unit_dead_207000105.png');
+    /* animation: dead1-x 4s 1 steps(3); */
 
 }
 
-@keyframes dead1-x {
+/* @keyframes dead1-x {
     from {
         background-position-y: 0;
         background-position-x: 0;
@@ -433,17 +441,79 @@ form {
         background-position-x: -258px;
     }
 
+} */
+
+.perso1win {
+    height: 110px;
+    width: 116px;
+    background-image: url('assets/sprites/unit_win_before_207000105.png');
+    animation: win1-x 3s 9 steps(3),
+    win1-y 3s 1 steps(9);
+
+
+}
+
+@keyframes win1-x {
+    from {
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+    to {
+        background-position-y: 0;
+        background-position-x: -354px;
+    }
+
+}
+
+@keyframes win1-y {
+    from {
+        background-position-y: 0;
+    }
+    to {
+        background-position-y: -999px;
+    }
+}
+
+.perso2win {
+    height: 130px;
+    width: 195px;
+    background-image: url('assets/sprites/unit_win_before_207001005.png');
+    animation: win2-x 3s 8 steps(3),
+    win2-y 3s 1 steps(8);
+
+
+}
+
+@keyframes win2-x {
+    from {
+        background-position-y: 0;
+        background-position-x: 0;
+    }
+    to {
+        background-position-y: 0;
+        background-position-x: -600px;
+    }
+
+}
+
+@keyframes win2-y {
+    from {
+        background-position-y: 0;
+    }
+    to {
+        background-position-y: -1160px;
+    }
 }
 
 .perso2dead {
-    height: 63px;
-    width: 126px;
-    background-image: url('assets/sprites/unit_idle_207001005_dead.png');
-    animation: dead2-x 4s 1 steps(3);
+    height: 42px;
+    width: 86px;
+    background-image: url('assets/sprites/unit_dead_207001005.png');
+    /* animation: dead2-x 4s 1 steps(3); */
 
 }
 
-@keyframes dead2-x {
+/* @keyframes dead2-x {
     from {
         background-position-y: 0;
         background-position-x: 0;
@@ -453,7 +523,7 @@ form {
         background-position-x: -372px;
     }
 
-}
+} */
 
 
 
@@ -761,16 +831,7 @@ form {
     max-width: 100%
    
 }
-#intro {
-    width: 100vw;
-    height: 100vh;
-    background-image: url("assets/images/final_fantasy_vii_remake_start_screen_by_rtql8d-d90oimk.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: 300;
-    display: flex;
-    transition: ease-in 5s;
-}
+
 
 #gameover {
     width: 100%;

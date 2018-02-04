@@ -1,6 +1,6 @@
 "use strict"
 class PersoModel {
-    constructor(name, pv, cp, str, def, item, maxPv, idleAnim ,skills = [],maxCp,summonCount,limitBreak,deadAnim,id) {
+    constructor(name, pv, cp, str, def, item, maxPv, idleAnim ,skills = [],maxCp,summonCount,limitBreak,deadAnim,id,winAnim) {
         this.name = name;
         this.pv = pv;
         this.cp = cp;
@@ -15,6 +15,7 @@ class PersoModel {
         this.limitBreak = limitBreak;
         this.deadAnim = deadAnim;
         this.id = id;
+        this.winAnim = winAnim;
         
     }
 
@@ -77,7 +78,16 @@ class PersoModel {
         this.id.addEventListener('animationend', function() {
         _this.id.setAttribute('class',`${_this.idleAnim}`);
         containerPerso.style.justifyContent = "space-around";
+        if (target.pv <= 0) {
+            _this.id.setAttribute('class',_this.winAnim);
+            _this.id.addEventListener('animationend', function() {
+                body.setAttribute('id','gameover');
+                setTimeout("location.reload(true);",8000);
+            })
+            
+        }
         })
+        
 
     };
 
@@ -108,6 +118,14 @@ class PersoModel {
         this.id.addEventListener('animationend', function() {
         _this.id.setAttribute('class',`${_this.idleAnim}`);
         containerPerso.style.justifyContent = "space-around";
+        if (target.pv <= 0) {
+            _this.id.setAttribute('class',_this.winAnim);
+            _this.id.addEventListener('animationend', function() {
+                body.setAttribute('id','gameover');
+                setTimeout("location.reload(true);",8000);
+            })
+            
+        }
         });
         this.summonCount--;
 
@@ -124,6 +142,14 @@ class PersoModel {
             hitAudio.play();
             this.id.addEventListener('animationend', function() {
             _this.id.setAttribute('class', `${_this.idleAnim}`);
+            if (target.pv <= 0) {
+                _this.id.setAttribute('class',_this.winAnim);
+                _this.id.addEventListener('animationend', function() {
+                    body.setAttribute('id','gameover');
+                    setTimeout("location.reload(true);",8000);
+                })
+                
+            }
             containerPerso.style.justifyContent = "space-around";
             })
             console.log('no cp left,attaque normale');
@@ -143,6 +169,14 @@ class PersoModel {
             hitAudio.play();
             this.id.addEventListener('animationend', function() {
             _this.id.setAttribute('class', _this.idleAnim);
+            if (target.pv <= 0) {
+                _this.id.setAttribute('class',_this.winAnim);
+                _this.id.addEventListener('animationend', function() {
+                    body.setAttribute('id','gameover');
+                    setTimeout("location.reload(true);",8000);
+                })
+                
+            }
             containerPerso.style.justifyContent = "space-around";
             })
             console.log(`${this.skills[idAttack].name} de ${this.name}.`)
@@ -192,6 +226,14 @@ class PersoModel {
             hitAudio.play();
             this.id.addEventListener('animationend', function() {
             _this.id.setAttribute('class', `${_this.idleAnim}`);
+            if (target.pv <= 0) {
+                _this.id.setAttribute('class',_this.winAnim);
+                _this.id.addEventListener('animationend', function() {
+                    body.setAttribute('id','gameover');
+                    setTimeout("location.reload(true);",8000);
+                })
+                
+            }
             containerPerso.style.justifyContent = "space-around";
             })
             console.log('no cp left,attaque normale');
@@ -210,6 +252,14 @@ class PersoModel {
             hitAudio.play();
             this.id.addEventListener('animationend', function() {
                 _this.id.setAttribute('class',_this.idleAnim);
+                if (target.pv <= 0) {
+                    _this.id.setAttribute('class',_this.winAnim);
+                    _this.id.addEventListener('animationend', function() {
+                        body.setAttribute('id','gameover');
+                        setTimeout("location.reload(true);",8000);
+                    })
+                    
+                }
                 containerPerso.style.justifyContent = "space-around";
             })
             console.log(`${this.skills[idAttack].name} de ${this.name}.`)
@@ -233,6 +283,14 @@ class PersoModel {
         hitAudio.play();
         this.id.addEventListener('animationend', function() {
         _this.id.setAttribute('class', _this.idleAnim);
+        if (target.pv <= 0) {
+            _this.id.setAttribute('class',_this.winAnim);
+            _this.id.addEventListener('animationend', function() {
+                body.setAttribute('id','gameover');
+                setTimeout("location.reload(true);",8000);
+            })
+            
+        }
         containerPerso.style.justifyContent = "space-around";
         })
         console.log(`${this.skills[idAttack].name} de ${this.name}.`)
@@ -302,13 +360,7 @@ class PersoModel {
     endGame() {
         if (this.pv <= 0) {
             this.id.setAttribute('class', this.deadAnim);
-            this.id.addEventListener('animationend', function() {
-                body.setAttribute('id','gameover');
-                setTimeout("location.reload(true);",6000);
-            })
             
-    
-
         }
     }
     

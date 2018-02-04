@@ -1,22 +1,3 @@
-"use strict"
-let cloud = new Perso1;
-let sephiroth = new Perso2;
-
-let potion = {
-    name : 'Potion',
-    hp : 75
-}
-
-let hiPotion = {
-    name : 'hi-potion',
-    hp : 125
-}
-
-let manaPot = {
-    name : 'Ether',
-    cp : 25
-}
-
 let form = document.querySelector('form');
 let attack = document.querySelector('#attack');
 let invocation = document.querySelector('#invocation');
@@ -37,40 +18,68 @@ let SephirothHp = document.querySelector('.barpv1');
 let SephirothHpcontainer = document.querySelector('.barcontainer');
 let gameOver = document.querySelector('#gameover');
 let containerPerso = document.querySelector('.container-perso');
-let perso1 = document.querySelector('.perso1');
-let perso2 = document.querySelector('.perso2');
-let audio = document.querySelector('audio');
+//let perso2 = document.querySelector('.perso2');
+let limitBreakButton = document.querySelector('#limitbreak');
+let themeSong = new Audio("assets/audio/Final Fantasy - Prelude Orchestral.mp3");
+fightSong = new Audio('assets/audio/final-fantasy-vii-last-stand2.mp3');
+let startMenu = document.querySelector('.start-menu');
+let logs = document.querySelector('#log');
+let backgroundbtn = document.querySelector('#backgbtn');
+let body = document.querySelector('body');
+let background = document.querySelector('.container-game');
+let intro = document.querySelector('#intro');
+themeSong.play();
+themeSong.loop = true;
+themeSong.volume = 0.55;
+display();
 
-function endGame(target1,target2) {
-    if (target1.pv <= 0) {
-        perso1.setAttribute('class', 'perso1dead');
-        console.log(`${target1.name} died`);
-        gameOver.style.display ="flex";
+// startMenu.addEventListener('click', function () {
+//     startMenu.style.backgroundImage = ;
+    
+    
+// })
 
+
+
+
+intro.addEventListener('click' , function () {
+    
+    themeSong.pause();
+    fightSong.play();
+    fightSong.loop = true;
+    fightSong.volume = 0.15;
+
+    intro.setAttribute('id', "");
+    
+})
+
+backgroundbtn.addEventListener('click', function (event) {
+    let tab = ["url('assets/images/image0.gif')","url('assets/images/image1.gif')","url('assets/images/LafBWtl.gif')"];
+    
+    background.style.backgroundImage = tab[1];
         
-    }
-    if (target2.pv <= 0) {
-        perso2.setAttribute('class', 'perso2dead');
-        console.log(`${target2.name} died`);
-        gameOver.style.display ="flex";
-
         
-    }
 
-};
+});
 
 
 attack.addEventListener('click' , function(event){
     cloud.attack(sephiroth,0);
     sephiroth.iaAttack(cloud);
-    endGame(cloud,sephiroth);
     display();
     
 });
-invocation.addEventListener('click' , function(event){
-    cloud.skill(sephiroth,5);
+
+limitBreakButton.addEventListener('click' , function(event){
+    cloud.limitBreakSkill(sephiroth,3);
     sephiroth.iaAttack(cloud);
-    endGame(cloud,sephiroth);
+    display();
+    
+});
+
+invocation.addEventListener('click' , function(event){
+    cloud.summon(sephiroth,5);
+    sephiroth.iaAttack(cloud);
     display();
     
 });
@@ -88,7 +97,6 @@ skill.addEventListener('click' , function(event){
 skill1.addEventListener('click' , function(event){
     cloud.skill(sephiroth,1);
     sephiroth.iaAttack(cloud);
-    endGame(cloud,sephiroth);
 
     display();
     
@@ -97,25 +105,34 @@ skill1.addEventListener('click' , function(event){
 skill2.addEventListener('click' , function(event){
     cloud.skill(sephiroth,2);
     sephiroth.iaAttack(cloud);
-    endGame(cloud,sephiroth);
+   
     display();
    
     
 });
 skill3.addEventListener('click' , function(event){
+    cloud.magick(sephiroth,4);
     sephiroth.iaAttack(cloud);
-    endGame(cloud,sephiroth);
-    cloud.skill(sephiroth,3);
     display();
+
+   
+    
+});
+
+skill4.addEventListener('click' , function(event){
+    cloud.buff(9);
+    sephiroth.iaAttack(cloud);
+    display();
+
    
     
 });
 
 block.addEventListener('click' , function(event){
     sephiroth.iaAttack(cloud);
-    endGame(cloud,sephiroth);
     cloud.actionBlock(sephiroth,6);
     display();
+
    
     
 });
@@ -131,46 +148,14 @@ item.addEventListener('click' , function(event){
 
 item1.addEventListener('click' , function(event){
     sephiroth.iaAttack(cloud);
-    cloud.useItem(potion,7);
+    cloud.useItem(hiPotion,7);
     display();
     
 });
 
 item2.addEventListener('click' , function(event){
     sephiroth.iaAttack(cloud);
-    cloud.useItem(hiPotion,7);
+    cloud.useCpItem(manaPot,8);
     display();
     
 });
-
-function display() {
-    let sephirothHp = document.querySelector('#barpv1');
-    let sephirothHptext = document.querySelector('#barpv1text');
-    let cloudHptext = document.querySelector('#barpv2text');
-    let cloudHp = document.querySelector('#barpv2');
-    let sephirothCp = document.querySelector('#barcp1');
-    let cloudCp = document.querySelector('#barcp2');
-    let cloudCptext = document.querySelector('#barcp2text');
-    let sephirothCptext = document.querySelector('#barcp1text');
-
-    sephirothHptext.textContent = `PV : ${sephiroth.pv} /200`;
-    cloudHptext.textContent = `PV : ${cloud.pv} /275`;
-    sephirothHp.style.width = sephiroth.pv/2  + "%";
-    cloudHp.style.width = cloud.pv/2.5   + "%";
-    sephirothCp.style.width = sephiroth.cp*4 + "%";
-    cloudCp.style.width = cloud.cp*2 + "%";
-    sephirothCptext.textContent = `CP: ${sephiroth.cp} /25`;
-    cloudCptext.textContent = `CP: ${cloud.cp} /50`;
-    // skill1.setAttribute('value', `${climHazard.skillName} : ${climHazard.cpCost} cp`);
-    // skill2.setAttribute('value', `${meteoRain.skillName} : ${meteoRain.cpCost} cp`);
-    // skill3.setAttribute('value', `${omnislash.skillName} : ${omnislash.cpCost} cp`);
-    // item1.setAttribute('value', `${potion.name} : restaure ${potion.hp} pv`);
-    skillblock.style.display ='none';
-
-}
-
-display();
-
-
-
-
