@@ -357,9 +357,15 @@ class PersoModel {
 
 
 
-    endGame() {
+    endGame(target) {
         if (this.pv <= 0) {
             this.id.setAttribute('class', this.deadAnim);
+            
+        }
+        if (this.pv <= 0 && target.pv <=0 ) {
+            this.id.setAttribute('class', this.deadAnim);
+            body.setAttribute('id','gameover');
+            setTimeout("location.reload(true);",8000);
             
         }
     }
